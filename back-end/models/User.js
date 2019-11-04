@@ -1,26 +1,34 @@
 const mongoose = require('mongoose');
+const moment = require('moment');
+const now = moment();
 
 const UserSchema = new mongoose.Schema({
-    name: {
+    username: {
         type: String,
-        required: true
+        trim: true,
+        unique: true,
+        required: true,
+        default: ''
     },
     email: {
         type: String,
+        trim: true,
         required: true,
-        uniquer: true
+        unique: true, 
+        default: ''
     },
     password: {
         type: String,
-        require: true
+        require: true,
+        default: ''
     },
     avatar: {
         type: String
     },
-    date: {
-        type: Date,
-        default: Date.now
+    timestamp: {
+        type: String,
+        default: now.format("dddd, MMMM Do YYYY, h:mm:ss a")
     }
 });
 
-module.exports = User = mongoose.model('user', UserSchema);
+module.exports = mongoose.model('User', UserSchema);
