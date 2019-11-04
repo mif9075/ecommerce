@@ -4,10 +4,21 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const mongoose = require('mongoose');
+
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+require('dotenv').config();
+
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true})
+    .then( ()=> {
+        console.log('MONGODB CONNECTED')
+    })
+    .catch( err => console.log(`ERROR: ${err}`))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
