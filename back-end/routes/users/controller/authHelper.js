@@ -1,6 +1,7 @@
 const User = require("../../../models/User");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const gravatar = require('gravatar')
 
 async function hashPassword(password) {
     let genSalt = await bcrypt.genSalt(10);
@@ -13,7 +14,11 @@ async function createUser(user) {
         username: user.username,
         email: user.email,
         password: user.password,
-        avatar: user.avatar
+        avatar: gravatar.url(user.email, {
+            s: '200',
+            r: 'pg',
+            d: 'mm'
+        })
     })
     return newUser;
 }
@@ -22,7 +27,7 @@ async function errorHandler(error) {
     let errorMessage = null;
     if (error.errmsg.includes('email_1')) {
         errorMessage = 'Email Already Exist';
-    } else if (error.errmsg.includes(' username_1')){
+    } else if (error.errmsg.includes('username_1')){
         errorMessage = 'Username Already Exist';
     }
     return errorMessage
