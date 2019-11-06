@@ -1,153 +1,169 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import './Signup.css';
-import Input from '../../../Factory/Input/InputClass';
-import ButtonClass from '../../../Factory/Button/ButtonClass';
-import { ValidatorForm } from 'react-material-ui-form-validator';
-import formArray from '../Signup/SignupConfig.js';
-import { signup, handleErrorSignup} from '../../../redux/action/authUserAction';
-import Spinner from '../../../Factory/Spinner/index';
-import MessageBar from '../../../Factory/MessageBar/MessageBar';
+import React, { useState, useEffect } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import CreateIcon from "@material-ui/icons/Create";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import formArray from "./SignupConfig";
+import Input from "../../../Factory/Input";
 
+function Copyright() {
+  return (
+    <Typography variant="body2" color="textSecondary" align="center">
+      {"Copyright © "}
+      <Link color="inherit" href="https://material-ui.com/">
+        PicHub
+      </Link>{" "}
+      {new Date().getFullYear()}
+      {"."}
+    </Typography>
+  );
+}
 
-class Signup extends Component {
-
-    state= {
-        formData: {
-            username: '',
-            email: '',
-            password: '',
-            confirmPassword: ''
-        },
-        submitted: false,
-        redirectSecond: null,
-        redirectToggle: false,
+const useStyles = makeStyles(theme => ({
+  "@global": {
+    body: {
+      backgroundColor: theme.palette.common.white
     }
+  },
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1)
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2)
+  }
+}));
 
-    componentDidMount() {
-        if (this.props.authUser.isAuthenticated) {
-            this.props.history.push('/');
-        }
-        //Custom rule will have name 'isPasswordMatch'
-        ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
-            const { formData } = this.state;
-            if (value !== formData.password) {
-                return false;
-            }
-            return true;
-        });
-    }
+export default function SignUp() {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  });
 
-    handleChange = (event) => {
-        const { formData } = this.state;
-        formData[event.target.name] = event.target.value;
-        this.setState({ formData });
-    }
+  useEffect(() => {
+    ValidatorForm.addValidationRule("isPasswordMatch", value => {
+      if (value !== formData.password) {
+        console.log(value);
+        console.log("dont match");
+        return false;
+      } else {
+        console.log(value);
+        console.log("match");
+        return true;
+      }
+    });
+  });
 
-    successfullySignedUp = () => {
-        this.setState({
-            submitted: false,
-            formData: {
-                username: '',
-                email: '',
-                password: '',
-                confirmPassword: ''
-            }
-        })
-    }
+  console.log(formData);
+  const handleChange = event => {
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value
+    });
+  };
 
-    countDownRedirect = () => {
-        var timeleft = 4;
-        var downloadTimer = setInterval(function(){
+  const renderInputs = () => {
+    let inputs = formArray.map((field, index) => {
+      return (
+        <div key={field.input.label}>
+          <Input
+            // variant="outlined"
+            // fullWidth
+            {...field}
+            {...formData}
+            handleInputChange={handleChange}
+          />
+        </div>
+      );
+    });
+    return inputs;
+  };
 
-            timeleft -= 1;
-            console.log(timeleft)
-            this.setState({
-                redirectSecond: timeleft
-            })
+  // console.log(resource);
+  const classes = useStyles();
 
-            if(timeleft === 0){
-                clearInterval(downloadTimer);
-                this.props.history.push('/sign-in')
-            }
-        }.bind(this), 750);
-    }
+  return (
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <CreateIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign Up
+        </Typography>
+        <ValidatorForm className={classes.form} onSubmit={() => ""} noValidate>
+          {/* <TextValidator
+            validators={["required", "isEmail"]}
+            errorMessages={["this field is required", "email is not valid"]}
+            onChange={handleChange}
+            value={formData.email}
+            type="email"
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="input-email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
+            autoFocus
+          />
 
-    handleSubmit = (event) => {
-        event.preventDefault();
-        this.setState({
-            submitted: true,
-        }, () => {
-            console.log(this.state.formData)
-            this.props.signup(this.state.formData)
-                .then(() => {
-                    this.successfullySignedUp();
-
-                    this.setState({
-                        redirectToggle: true
-                    })
-                    this.countDownRedirect();
-
-                })
-                .catch(error => {
-                    this.props.handleErrorSignup(error.response.data.message)
-                    this.setState({
-                        submitted: false
-                    })
-                })
-        })
-    }
-
-    render() {
-        
-        const {submitted} = this.state;
-
-        let form = (
-            formArray.map((field, index) => {
-
-                return(
-                    <div key={field.input.label}>
-                        <Input
-                            {...field}
-                            {...this.state.formData}
-                            handleInputChange={this.handleChange}
-                        />
-                        <br />
-                    </div>
-                )
-            })
-        )
-        
-        return (
-
-            <>
-            {this.props.message.serverMessage !==null ? <MessageBar
-            fontColorStyle={this.props.message.messageStyle.fontColorStyle}
-            dynamicClassName={this.props.message.messageStyle.dynamicClassName}
-            >{this.props.message.serverMessage} {this.state.redirectToggle ? `Redirecting in ${this.state.redirectSecond}` : ''}
-            </MessageBar> : '' }
-
-        <ValidatorForm className='Form' onSubmit={this.handleSubmit}>
-            {
-                submitted ? <Spinner /> : form
-            }
-            <br />
-
-            <ButtonClass
-            color="primary"
-            variant="contained"
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+          /> */}
+          {renderInputs()}
+          {/* <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="Remember me"
+          /> */}
+          <Button
             type="submit"
-            disabled={submitted}
-            >
-            {
-                (submitted && 'Your form is submitted!') || (!submitted && 'Submit')
-            }
-            </ButtonClass>
-
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Sign Up
+          </Button>
         </ValidatorForm>
-            </>
-        )
-    }
+      </div>
+      <Box mt={8}>
+        <Copyright />
+      </Box>
+    </Container>
+  );
 }
 
 const mapStateToProps = (state) => {
