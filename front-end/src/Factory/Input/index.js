@@ -41,10 +41,14 @@ const Input = props => {
           style={input.style}
           name={input.name}
           type={input.type}
+          fullWidth={input.fullWidth}
+          margin={input.margin}
+          variant={input.variant}
           value={props.username}
           validators={input.validators}
           errorMessages={input.errorMessages}
           onChange={props.handleInputChange}
+          autoFocus={input.autoFocus}
         />
       );
       break;
@@ -64,8 +68,8 @@ const Input = props => {
           onChange={props.handleInputChange}
           margin={input.margin}
           fullWidth={input.fullWidth}
-          autoFocus={input.autoFocus}
           variant={input.variant}
+          autoFocus={input.autoFocus}
           autoComplete={props.autoComplete}
         />
       );
@@ -85,8 +89,8 @@ const Input = props => {
           errorMessages={input.errorMessages}
           onChange={props.handleInputChange}
           variant={input.variant}
-          margin={input.margin}
           fullWidth={input.fullWidth}
+          margin={input.margin}
           autoComplete={input.autoComplete}
         />
       );
@@ -100,10 +104,13 @@ const Input = props => {
           style={input.style}
           name={input.name}
           type="password"
+          variant={input.variant}
+          fullWidth={input.fullWidth}
           value={props.confirmPassword}
           validators={input.validators}
           errorMessages={input.errorMessages}
           onChange={props.handleInputChange}
+          margin={input.margin}
         />
       );
       break;
