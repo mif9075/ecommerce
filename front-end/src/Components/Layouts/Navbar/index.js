@@ -14,15 +14,16 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
-// import { position } from "@material-ui/system/";
-import Box from "@material-ui/core/Box";
 import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
-  signupAndSignin: {
-    marginRight: "10px",
+  navLinkStyle: {
+    textDecoration: "none",
+    color: "white"
+  },
+  activeStyles: {
     color: "white",
-    textDecoration: "none"
+    textDecoration: "underline white"
   },
   grow: {
     flexGrow: 1
@@ -87,8 +88,10 @@ const useStyles = makeStyles(theme => ({
 
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
+  const activeStyles = { color: "white", textDecoration: "underline white" };
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const isAuth = false;
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -110,59 +113,60 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const userNav = () => {
-    // if (this.props.authUser.isAuthenticated) {
-    if (true) {
-      console.log("yes");
+  const menuId = "primary-search-account-menu";
+  const renderSignin = () => {
+    if (isAuth) {
       return (
-        <div className="signup-sigin">
-          <NavLink
-            exact
-            to="/sign-up"
-            className={classes.signupAndSignin}
-            activeStyle={{ textDecoration: "underline white" }}
-          >
-            Sign Up
-          </NavLink>
-          <NavLink
-            exact
-            to="/sign-in"
-            className={classes.signupAndSignin}
-            activeStyle={{ textDecoration: "underline white" }}
-          >
-            Sign In
-          </NavLink>
-        </div>
+        <>
+          <div className={classes.sectionDesktop}>
+            <IconButton aria-label="show 4 new mails" color="inherit">
+              <Badge badgeContent={4} color="secondary">
+                <MailIcon />
+              </Badge>
+            </IconButton>
+            <IconButton aria-label="show 17 new notifications" color="inherit">
+              <Badge badgeContent={17} color="secondary">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+            <IconButton
+              edge="end"
+              aria-label="account of current user"
+              aria-controls={menuId}
+              aria-haspopup="true"
+              onClick={handleProfileMenuOpen}
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+          </div>
+          <div className={classes.sectionMobile}>
+            <IconButton
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="inherit"
+            >
+              <MoreIcon />
+            </IconButton>
+          </div>
+        </>
       );
     } else {
       return (
-        <div className={classes.sectionDesktop}>
-          <IconButton aria-label="show 4 new mails" color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <MailIcon />
-            </Badge>
-          </IconButton>
-          <IconButton aria-label="show 17 new notifications" color="inherit">
-            <Badge badgeContent={17} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-          <IconButton
-            edge="end"
-            aria-label="account of current user"
-            aria-controls={menuId}
-            aria-haspopup="true"
-            onClick={handleProfileMenuOpen}
-            color="inherit"
-          >
-            <AccountCircle />
-          </IconButton>
-        </div>
+        <NavLink
+          exact
+          to="/sign-in"
+          className={classes.navLinkStyle}
+          activeStyle={activeStyles}
+        >
+          <Typography>Signin</Typography>
+        </NavLink>
       );
     }
   };
 
-  const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -223,19 +227,16 @@ export default function PrimarySearchAppBar() {
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
+          <NavLink
+            exact
+            to="/"
+            className={classes.navLinkStyle}
+            activeStyle={activeStyles}
           >
-            <MenuIcon />
-          </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            <NavLink to="/" className={classes.signupAndSignin}>
+            <Typography className={classes.title} variant="h6" noWrap>
               PicHub
-            </NavLink>
-          </Typography>
+            </Typography>
+          </NavLink>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -250,18 +251,7 @@ export default function PrimarySearchAppBar() {
             />
           </div>
           <div className={classes.grow} />
-          {userNav()}
-          <div className={classes.sectionMobile}>
-            <IconButton
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </div>
+          {renderSignin()}
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
