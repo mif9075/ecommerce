@@ -16,13 +16,8 @@ class App extends Component {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Home} />
-<<<<<<< HEAD
           <Route exact path="/sign-in" component={Signin} />
           <Route exact path="/sign-up" component={Signup} />
-=======
-          <Route exact path="/sign-up" component={Signup} />
-          <Route exact path="/sign-in" component={Signin} />
->>>>>>> e28726d01469179d80ba75c446d4da4089eca47d
         </Switch>
         <Footer />
       </>

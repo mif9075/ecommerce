@@ -2,6 +2,7 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var passport = require('passport');
 var logger = require('morgan');
 var cors = require('cors');
 
@@ -10,6 +11,7 @@ const mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users/users');
+var cloudiRouter = require('./routes/cloudiRouter/cloudiRouter');
 
 var app = express();
 
@@ -25,6 +27,10 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(passport.initialize());
+
+require('./lib/Passport')(passport);
+
 app.use(cors());
 
 app.use(logger('dev'));
@@ -35,6 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/cloudiRouter', cloudiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
