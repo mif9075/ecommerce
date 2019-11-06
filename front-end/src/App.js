@@ -28,13 +28,8 @@ class App extends Component {
 const mapStateToProps = state => {
   console.log(state);
   return {
-    test: state.test
+    authUser: state.authUser
   };
 };
 
-export default connect(
-  mapStateToProps   ,
-  {
-      actionType: "TWO"
-  }
-)(App);
+export default withRouter(connect(mapStateToProps, null )( App ));
