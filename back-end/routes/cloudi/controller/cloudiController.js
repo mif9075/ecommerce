@@ -1,5 +1,5 @@
 const Cloudi = require('../model/Cloudi');
-const User = require('../../../models/User');
+const User = require('../../users/model/User');
 
 module.exports = {
 
@@ -21,6 +21,16 @@ module.exports = {
             await foundUser.save();
             res.status(200).json(savedNewCloudi);
         } catch (error) {
+            res.status(500).json(error);
+        }
+    },
+    getTalkByID: async (req, res) => {
+        const id = req.params.id;
+        try {
+            let foundCloudi = await Cloudi.findById({_id: id});
+            res.status(200).json(foundCloudi);
+        } catch (error) {
+            console.log(error)
             res.status(500).json(error);
         }
     },
