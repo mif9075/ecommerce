@@ -166,11 +166,11 @@ export default function SignUp() {
   );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        message: state.message,
-        authUser: state.authUser
-    }
-}
+// const mapStateToProps = (state) => {
+//     return {
+//         message: state.message,
+//         authUser: state.authUser
+//     }
+// }
 
-export default connect(mapStateToProps, { signup, handleErrorSignup})(Signup)
+// export default connect(mapStateToProps, { signup, handleErrorSignup})(Signup)
