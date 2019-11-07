@@ -31,12 +31,12 @@ export const getAllUserCloudis = (id) => async dispatch => {
         return Promise.resolve(foundAllUserCloudis.data);
     } catch (error) {
         console.log(error)
-        dispatch(errorCreateTalks(error))
+        dispatch(errorCreateCloudi(error))
         return Promise.reject(error)
     }
 }
 
-export const createCloudi = (cloudiInfo) => async dispath => {
+export const createCloudi = (cloudiInfo) => async dispatch => {
 
     let cloudiObj = {
         id: cloudiInfo.id,
@@ -53,12 +53,12 @@ export const createCloudi = (cloudiInfo) => async dispath => {
         return Promise.resolve(success);
     } catch (error) {
         console.log(error)
-        dispatch(errorCreateTalk(error))
+        dispatch(errorCreateCloudi(error))
         return Promise.reject(error);
     }
 }
 
-const successCreateCloudi = (createdCloudi) => {
+const successCreateCloudi = (createdCloudi) => dispatch => {
     dispatch({
         type: CREATE_CLOUDI,
         payload: createdCloudi
@@ -72,7 +72,7 @@ const errorCreateCloudi = (message) => dispatch => {
     })
 }
 
-export const getCloudiBYID = (id) => async dispatch => {
+export const getCloudiByID = (id) => async dispatch => {
 
     try {
         let foundCloudi = await Axios.get(`/cloudi/get-cloudi-by-id/${id}`)
@@ -82,10 +82,12 @@ export const getCloudiBYID = (id) => async dispatch => {
             payload: foundCloudi.data
         });
 
-        return Promise.resolve(foundTalk.data)
+        return Promise.resolve(foundCloudi.data)
+
     } catch (error) {
      dispatch(errorCreateCloudi(error));
      return Promise.reject(error)
  }
+
 }
  

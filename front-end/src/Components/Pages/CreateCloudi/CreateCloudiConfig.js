@@ -14,3 +14,5 @@ input: {
 }
     }
 ]
+
+export default formArray;
