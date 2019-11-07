@@ -4,16 +4,13 @@ const moment = require('moment');
 const now = moment();
 
 const CloudiSchema = new mongoose.Schema({
-    album: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'album',
-        es_type: 'nested',
-        es_include_in_parent: true
-    },
     title: { type:String, default: ''},
     image: { type: String, default: ''},
     user_id:{
         type:Schema.Types.ObjectId, ref:'User'
+    },
+    album: {
+        type:Schema.Types.ObjectID, ref: 'Album'
     },
     timestamp: {
         type: String, default: now.format("dddd, MMMM Do YYYY, h:mm:ss a")

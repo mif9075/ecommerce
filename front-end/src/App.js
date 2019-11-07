@@ -18,6 +18,12 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/sign-in" component={Signin} />
           <Route exact path="/sign-up" component={Signup} />
+
+          {/* <PrivateRoute exact path="/create-cloudi" component={CreateCloudi} />
+          <PrivateRoute exact path="/see-cloudi/:id" component={SeeCloudi} />
+          <PrivateRoute exact path="/user-profile" component={UserProfile} /> */}
+
+          {/* <Route Path="" component={NotFound} /> */}
         </Switch>
         <Footer />
       </>
