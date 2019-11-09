@@ -1,26 +1,31 @@
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
+import Button from "../../../Factory/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
+import MatLink from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import { ValidatorForm } from "react-material-ui-form-validator";
 import formArray from "./SigninConfig";
 import Input from "../../../Factory/Input";
+// import MessageBar from "../../../Factory/MessageBar";
+import { NavLink, Link } from "react-router-dom";
+import {
+  signin,
+  handleSignupError
+} from "../../../redux/action/authUserAction";
+import MessageBar from "../../../Factory/MessageBar";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" to="https://material-ui.com/">
         PicHub
       </Link>{" "}
       {new Date().getFullYear()}
@@ -54,11 +59,18 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SignIn() {
+export default function SignIn(props) {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     email: "",
     password: ""
   });
+
+  const [submitted, setSubmitted] = useState({
+    submitted: false
+  });
+
+  const message = useSelector(state => state.message);
 
   const handleChange = event => {
     setFormData({
@@ -67,17 +79,40 @@ export default function SignIn() {
     });
   };
 
+  const resetState = () => {
+    setFormData({
+      email: "",
+      password: ""
+    });
+    setSubmitted({
+      submitted: false
+    });
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    setSubmitted({
+      submitted: true
+    });
+    dispatch(signin(formData))
+      .then(() => {
+        resetState();
+        props.history.push("/");
+      })
+      .catch(error => {
+        dispatch(handleSignupError(error.response.data.message));
+        setSubmitted({
+          submitted: false
+        });
+      });
+  };
+
   const renderInputs = () => {
     let inputs = formArray.map((field, index) => {
-      console.log(field);
       return (
-        <Input
-          // variant="outlined"
-          // fullWidth
-          {...field}
-          {...formData}
-          handleInputChange={handleChange}
-        />
+        <div key={field.input.label}>
+          <Input {...field} {...formData} handleInputChange={handleChange} />
+        </div>
       );
     });
     return inputs;
@@ -85,7 +120,6 @@ export default function SignIn() {
 
   // console.log(resource);
   const classes = useStyles();
-
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -94,59 +128,43 @@ export default function SignIn() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Sign In
         </Typography>
-        <ValidatorForm className={classes.form} onSubmit={() => ""} noValidate>
-          {/* <TextValidator
-            validators={["required", "isEmail"]}
-            errorMessages={["this field is required", "email is not valid"]}
-            onChange={handleChange}
-            value={formData.email}
-            type="email"
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="input-email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          /> */}
+        {message.serverMessage !== null ? (
+          <MessageBar
+            fontColorStyle={message.messageStyle.fontColorStyle}
+            dynamicClassName={message.messageStyle.dynamicClassName}
+          >
+            <Typography>{message.serverMessage}</Typography>
+          </MessageBar>
+        ) : (
+          ""
+        )}
+        <ValidatorForm
+          className={classes.form}
+          onSubmit={handleSubmit}
+          noValidate
+        >
           {renderInputs()}
-          {/* <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          /> */}
           <Button
             type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            // disabled={submitted.submitted}
           >
-            Sign In
+            {(submitted.submitted && "Your form is submitted!") ||
+              (!submitted.submitted && "Submit")}
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link to="/forgot-password" variant="body2">
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
-              <Link href="/sign-up" variant="body2">
+              <Link to="/sign-up" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

@@ -7,8 +7,11 @@ import { Provider } from "react-redux";
 import "./index.css";
 import Spinner from "./Factory/Spinner";
 import store from "./redux/store";
+import checkTokenAuth from "./lib/checkTokenAuth";
 
 const App = React.lazy(() => import("./App"));
+
+checkTokenAuth(store);
 
 const Application = () => {
   return (

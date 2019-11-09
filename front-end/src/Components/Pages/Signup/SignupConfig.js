@@ -46,7 +46,7 @@ const formArray = [
       type: "confirmPassword",
       name: "confirmPassword",
       id: "input-confirm-password",
-      label: "confirm-password",
+      label: "Confirm Password",
       variant: "outlined",
       fullWidth: true,
       validators: ["isPasswordMatch", "required"],

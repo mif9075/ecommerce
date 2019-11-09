@@ -1,63 +1,50 @@
 import {
-    AUTH_USER_SUCCESSFUL,
-    AUTH_USER_LOGOUT,
-    AUTH_SIGNUP_SUCCESSFUL,
-    AUTH_USER_FAILURE
-} from '../actionTypes';
-import setAuthToken from '../../lib/setAuthToken';
-import Axios from '../../lib/Axios';
+  AUTH_USER_SUCCESSFUL,
+  AUTH_USER_LOGOUT,
+  AUTH_SIGNUP_SUCCESSFUL,
+  AUTH_USER_FAILURE
+} from "../actionTypes";
+import Axios from "../../lib/Axios";
+import setAuthToken from "../../lib/setAuthToken";
 
-export const signup = (userInfo) => async dispatch => {
-    try {
-        let success = await Axios.post('/users/sign-up', userInfo);
-        dispatch(handleSignupSuccess(success.data.message));
-        return Promise.resolve(success.data.message)
-    } catch (error) {
-        return Promise.reject(error);
-    }
-}
+const signin = userInfo => async dispatch => {
+  try {
+    let success = await Axios.post("./users/sign-in", userInfo);
+    const { token } = success.data;
+    dispatch(setAuthSuccessUser(token));
+    setAuthToken(token);
+    localStorage.setItem("jwtToken", token);
+    return Promise.resolve("Signin Successful!");
+  } catch (error) {
+    console.log(error);
+    return Promise.reject(error);
+  }
+};
 
-export const signin = (userInfo) => async dispatch => {
-    try {
-        let success = await Axios.post('/users/sign-in', userInfo);
+const signup = userInfo => dispatch => {
+  return "ho";
+};
 
-        const { token } = success.data;
+const logout = () => dispatch => {
+  localStorage.removeItem("jwtToken");
+  setAuthToken(false);
+  dispatch({
+    type: AUTH_USER_LOGOUT
+  });
+};
 
-        dispatch(setAuthSuccessUser(token));
-        setAuthToken(token);
-        localStorage.setItem('jwtToken', token);
-        return Promise.resolve('Signin successful');
-    } catch (error) {
-        console.log(error)
-        return Promise.reject(error);
-    }
-}
+const setAuthSuccessUser = token => dispatch => {
+  dispatch({
+    type: AUTH_USER_SUCCESSFUL,
+    payload: token
+  });
+};
 
-export const logout = () => dispatch => {
-    localStorage.removeItem('jwtToken');
-    setAuthToken(false);
-    dispatch({
-        type: AUTH_USER_LOGOUT
-    });
-}
+const handleSignupError = message => dispatch => {
+  dispatch({
+    type: AUTH_USER_FAILURE,
+    payload: message
+  });
+};
 
-export const setAuthSuccessUser = (userInfo) => dispatch => {
-    dispatch({
-        type: AUTH_USER_SUCCESSFUL,
-        payload: userInfo
-    })
-}
-
-const handleSignupSuccess = (message) => dispatch => {
-    dispatch({
-        type: AUTH_SIGNUP_SUCCESSFUL,
-        payload: message
-    })
-}
-
-export const handleErrorSignup = (message) => dispatch => {
-    dispatch({
-        type: AUTH_USER_FAILURE,
-        payload: message
-    })
-}
+export { signin, signup, logout, setAuthSuccessUser, handleSignupError };

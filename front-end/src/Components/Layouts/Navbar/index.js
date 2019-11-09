@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -8,13 +9,13 @@ import InputBase from "@material-ui/core/InputBase";
 import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
-import MenuIcon from "@material-ui/icons/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import MailIcon from "@material-ui/icons/Mail";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { NavLink } from "react-router-dom";
+import { logout } from "../../../redux/action/authUserAction";
 
 const useStyles = makeStyles(theme => ({
   navLinkStyle: {
@@ -91,7 +92,8 @@ export default function PrimarySearchAppBar() {
   const activeStyles = { color: "white", textDecoration: "underline white" };
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const isAuth = false;
+  const isAuth = useSelector(state => state.authUser);
+  const dispatch = useDispatch();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -113,9 +115,14 @@ export default function PrimarySearchAppBar() {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
+  const handleLogout = () => {
+    dispatch(logout());
+    handleMenuClose();
+  };
+
   const menuId = "primary-search-account-menu";
   const renderSignin = () => {
-    if (isAuth) {
+    if (isAuth.isAuthenticated) {
       return (
         <>
           <div className={classes.sectionDesktop}>
@@ -161,7 +168,7 @@ export default function PrimarySearchAppBar() {
           className={classes.navLinkStyle}
           activeStyle={activeStyles}
         >
-          <Typography>Signin</Typography>
+          <Typography>Sign In</Typography>
         </NavLink>
       );
     }
@@ -179,6 +186,11 @@ export default function PrimarySearchAppBar() {
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem>
+        <NavLink to="/" onClick={handleLogout}>
+          Logout
+        </NavLink>
+      </MenuItem>
     </Menu>
   );
 
