@@ -23,12 +23,17 @@ const UserSchema = new mongoose.Schema({
         default: ''
     },
     avatar: {
-        type: String
+        type: String,
+        default: ''
     },
     timestamp: {
         type: String,
         default: now.format("dddd, MMMM Do YYYY, h:mm:ss a")
-    }
+    },
+    album: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Album',
+    }]
 });
 
 module.exports = mongoose.model('User', UserSchema);

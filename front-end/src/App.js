@@ -3,7 +3,10 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import "./App.css";
 import { connect } from "react-redux";
 
-const Home = React.lazy(() => import("./Components/Pages/Home"));
+import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
+import CreateCloudi from './Components/Pages/CreateCloudi/CreateCloudi';
+
+const Home   = React.lazy(() => import("./Components/Pages/Home"));
 const Navbar = React.lazy(() => import("./Components/Layouts/Navbar"));
 const Footer = React.lazy(() => import("./Components/Layouts/Footer"));
 const Signin = React.lazy(() => import("./Components/Pages/Signin"));
@@ -18,6 +21,13 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/sign-in" component={Signin} />
           <Route exact path="/sign-up" component={Signup} />
+
+          <PrivateRoute exact path="/create-cloudi" component={CreateCloudi} />
+          {/* <PrivateRoute exact path="/see-cloudi/:id" component={SeeCloudi} />
+          <PrivateRoute exact path="/user-profile" component={UserProfile} /> */} */}
+
+          {/* /* <Route Path="" component={NotFound} /> */}
+
         </Switch>
         <Footer />
       </>

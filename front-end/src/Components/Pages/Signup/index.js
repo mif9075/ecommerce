@@ -160,3 +160,12 @@ export default function SignUp() {
     </Container>
   );
 }
+
+// const mapStateToProps = (state) => {
+//     return {
+//         message: state.message,
+//         authUser: state.authUser
+//     }
+// }
+
+// export default connect(mapStateToProps, { signup, handleErrorSignup})(Signup)
