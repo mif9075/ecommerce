@@ -10,10 +10,10 @@ export default class Button extends Component {
           variant={this.props.variant}
           fullWidth={this.props.fullWidth ? true : false}
           type={this.props.type}
-          disable={this.props.disabled}
           onClick={this.props.onClick}
           style={this.props.style}
           className={this.props.className}
+          disabled={this.props.disabled}
         >
           {this.props.children}
         </Buttons>

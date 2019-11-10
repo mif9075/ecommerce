@@ -11,7 +11,6 @@ const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case AUTH_USER_FAILURE:
-      console.log("yup");
       return {
         serverMessage: action.payload,
         messageStyle: {

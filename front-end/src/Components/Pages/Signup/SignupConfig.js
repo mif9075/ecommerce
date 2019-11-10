@@ -10,7 +10,7 @@ const formArray = [
       autoFocus: true,
       margin: "normal",
       validators: ["required"],
-      errorMessages: ["this field is required"]
+      errorMessages: ["This field is required"]
     }
   },
   {
@@ -24,7 +24,7 @@ const formArray = [
       id: "input-email",
       label: "Email Address",
       validators: ["required", "isEmail"],
-      errorMessages: ["this field is required", "email is not valid"]
+      errorMessages: ["This field is required", "Email is not valid"]
     }
   },
   {
@@ -38,7 +38,7 @@ const formArray = [
       id: "input-password",
       label: "Password",
       validators: ["required"],
-      errorMessages: ["this field is required"]
+      errorMessages: ["This field is required"]
     }
   },
   {
@@ -50,7 +50,7 @@ const formArray = [
       variant: "outlined",
       fullWidth: true,
       validators: ["isPasswordMatch", "required"],
-      errorMessages: ["password mismatch", "this field is required"],
+      errorMessages: ["password mismatch", "This field is required"],
       margin: "normal"
     }
   }

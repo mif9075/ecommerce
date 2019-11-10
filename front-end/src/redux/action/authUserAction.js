@@ -21,8 +21,21 @@ const signin = userInfo => async dispatch => {
   }
 };
 
-const signup = userInfo => dispatch => {
-  return "ho";
+const signup = userInfo => async dispatch => {
+  try {
+    let success = await Axios.post("./users/sign-up", userInfo);
+    dispatch(handleSignupSuccess(success.data.message));
+    return Promise.resolve(success.data.message);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+const handleSignupSuccess = message => dispatch => {
+  dispatch({
+    type: AUTH_SIGNUP_SUCCESSFUL,
+    payload: message
+  });
 };
 
 const logout = () => dispatch => {

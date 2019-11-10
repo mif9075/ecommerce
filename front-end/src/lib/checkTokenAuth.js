@@ -6,7 +6,6 @@ const checkTokenAuth = store => {
   let jwtToken = localStorage.getItem("jwtToken");
 
   let decoded;
-  console.log(jwtToken);
   if (jwtToken) {
     setAuthToken(jwtToken);
     decoded = jwt_decode(jwtToken);
