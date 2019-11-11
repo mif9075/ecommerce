@@ -3,6 +3,10 @@ var router = express.Router();
 var passport = require('passport');
 var cloudiController = require('./controller/cloudiController');
 
+router.get('/', function(req, res, next) {
+    res.send('Cloudi router');
+  });
+
 router.post('/create-cloudi', passport.authenticate('jwt', {session: false}), cloudiController.createCloudi);
 
 router.get('get-cloudi-by-id/:id', passport.authenticate('jwt', {

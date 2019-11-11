@@ -16,6 +16,7 @@ class CreateCloudi extends Component {
     submitted: false,
     uploadPictureToggle: false
   };
+
   uploadWidget = () => {
     window.cloudinary.openUploadWidget(
       {
@@ -33,7 +34,7 @@ class CreateCloudi extends Component {
             formData["image"] = result.info.secure_url;
             this.setState({
               ...this.state,
-              formData
+              formData,
             });
           }
         }
@@ -48,11 +49,12 @@ class CreateCloudi extends Component {
         email: '',
         password: ''
       }
-    });
-  };
+    })
+  }
 
   handleSubmit = event => {
     event.preventDefault();
+    // console.log(event)
 
     this.setState(
       {
@@ -60,12 +62,16 @@ class CreateCloudi extends Component {
       },
       () => {
         let newUserObj = Object.assign({}, this.state.formData);
-        newUserObj.id = this.props.authUser.id;
+        // console.log(newUserObj)
+
+        newUserObj.id = this.props.authUser.user.id;
+
+        // console.log(this.props)
 
         this.props.createCloudi(newUserObj)
           .then(() => {
             this.successfullyCreatedCloudi();
-            this.props.history.push("/");
+            this.props.history.push('/');
           })
           .catch(error => {
             console.log(error);
@@ -73,8 +79,7 @@ class CreateCloudi extends Component {
               submitted: false
             });
           });
-      }
-    );
+      });
   };
 
   handleChange = event => {

@@ -11,6 +11,7 @@ const Navbar = React.lazy(() => import("./Components/Layouts/Navbar"));
 const Footer = React.lazy(() => import("./Components/Layouts/Footer"));
 const Signin = React.lazy(() => import("./Components/Pages/Signin"));
 const Signup = React.lazy(() => import("./Components/Pages/Signup"));
+const NotFound = React.lazy(() => import("./Components/Pages/NotFound"))
 
 class App extends Component {
   render() {
@@ -25,8 +26,7 @@ class App extends Component {
           <PrivateRoute exact path="/create-cloudi" component={CreateCloudi} />
           {/* <PrivateRoute exact path="/see-cloudi/:id" component={SeeCloudi} />
           <PrivateRoute exact path="/user-profile" component={UserProfile} /> */} */}
-
-          {/* /* <Route Path="" component={NotFound} /> */}
+          /* <Route Path="" component={NotFound} />
 
         </Switch>
         <Footer />
