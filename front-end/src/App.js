@@ -12,6 +12,8 @@ const Footer = React.lazy(() => import("./Components/Layouts/Footer"));
 const Signin = React.lazy(() => import("./Components/Pages/Signin"));
 const Signup = React.lazy(() => import("./Components/Pages/Signup"));
 const NotFound = React.lazy(() => import("./Components/Pages/NotFound"))
+const SeeCloudi = React.lazy(() => import("./Components/Pages/SeeCloudi"))
+const UserProfile = React.lazy(() => import("./Components/Pages/UserProfile"))
 
 class App extends Component {
   render() {
@@ -24,8 +26,8 @@ class App extends Component {
           <Route exact path="/sign-up" component={Signup} />
 
           <PrivateRoute exact path="/create-cloudi" component={CreateCloudi} />
-          {/* <PrivateRoute exact path="/see-cloudi/:id" component={SeeCloudi} />
-          <PrivateRoute exact path="/user-profile" component={UserProfile} /> */} */}
+          <PrivateRoute exact path="/see-cloudi/:id" component={SeeCloudi} />
+          <PrivateRoute exact path="/user-profile" component={UserProfile} />
           /* <Route Path="" component={NotFound} />
 
         </Switch>

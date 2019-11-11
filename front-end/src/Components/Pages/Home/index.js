@@ -2,6 +2,11 @@ import React, { Component } from "react";
 
 export default class Home extends Component {
   render() {
-    return <div>Welcome the PicHub!!!</div>;
+    return (
+        <div>
+            <br />
+            <h1>Welcome the PicHub!!!</h1>
+        </div>
+    )
   }
 }
