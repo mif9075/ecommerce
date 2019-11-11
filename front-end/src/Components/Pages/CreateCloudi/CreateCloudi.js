@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ButtonClass from "../../../Factory/Button";
+import ButtonClass from "../../../Factory/Button/";
 import formArray from "./CreateCloudiConfig";
 import { ValidatorForm } from "react-material-ui-form-validator";
 import Input from "../../../Factory/Input/index";
@@ -10,8 +10,8 @@ import { createCloudi } from "../../../redux/action/cloudiAction";
 class CreateCloudi extends Component {
   state = {
     formData: {
-      title: "",
-      image: ""
+      title: '',
+      image: ''
     },
     submitted: false,
     uploadPictureToggle: false
@@ -21,7 +21,7 @@ class CreateCloudi extends Component {
       {
         cloud_name: "beisboldom",
         upload_preset: "wdhfcxjk",
-        tags: ["hamster"]
+        tags: ['hamster']
       },
       (error, result) => {
         if (error) {
@@ -45,8 +45,8 @@ class CreateCloudi extends Component {
     this.setState({
       submitted: false,
       formData: {
-        email: "",
-        password: ""
+        email: '',
+        password: ''
       }
     });
   };
@@ -62,8 +62,7 @@ class CreateCloudi extends Component {
         let newUserObj = Object.assign({}, this.state.formData);
         newUserObj.id = this.props.authUser.id;
 
-        this.props
-          .CreateCloudi(newUserObj)
+        this.props.createCloudi(newUserObj)
           .then(() => {
             this.successfullyCreatedCloudi();
             this.props.history.push("/");
