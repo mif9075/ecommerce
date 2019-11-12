@@ -11,6 +11,7 @@ module.exports = {
 
         try {
             let foundUser = await User.findById(id);
+            console.log(foundUser)
             let newCloudi = await new Cloudi({
                 title: title,
                 image: image,
@@ -21,16 +22,16 @@ module.exports = {
             await foundUser.save();
             res.status(200).json(savedNewCloudi);
         } catch (error) {
+            console.log(error)
             res.status(500).json(error);
         }
     },
-    getTalkByID: async (req, res) => {
+    getCloudiByID: async (req, res) => {
         const id = req.params.id;
         try {
             let foundCloudi = await Cloudi.findById({_id: id});
             res.status(200).json(foundCloudi);
         } catch (error) {
-            console.log(error)
             res.status(500).json(error);
         }
     },

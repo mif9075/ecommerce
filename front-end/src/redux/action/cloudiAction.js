@@ -1,7 +1,7 @@
 import { CREATE_CLOUDI, ERROR_CREATE_CLOUDI, GET_CLOUDI_BY_ID, GET_ALL_USER_CLOUDIS, DELETE_USER_CLOUDI_BY_ID} from '../actionTypes/index';
 import Axios from '../../lib/Axios';
 
-export const deleteUserCloudiByID = (id) => async dispatch => {
+export const handleUserCloudiByID = (id) => async dispatch => {
     try{
 
     let deletedByID = await Axios.delete(`/cloudi/delete-by-id/${id}`);
@@ -23,7 +23,7 @@ export const getAllUserCloudis = (id) => async dispatch => {
     
     try {
         let foundAllUserCloudis = await Axios.get(`/cloudi/get-all-user-cloudis/${id}`)
-
+        
         dispatch({
             type: GET_ALL_USER_CLOUDIS,
             payload: foundAllUserCloudis.data

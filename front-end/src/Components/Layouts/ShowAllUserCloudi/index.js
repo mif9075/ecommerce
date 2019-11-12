@@ -24,7 +24,8 @@ class AllUserCloudis extends Component {
   componentDidMount() {
 
     this.setState({
-      isFetching: true
+      isFetching: true,
+    
     })
 
     this.props.getAllUserCloudis(this.props.authUser.user.id)
@@ -45,7 +46,11 @@ class AllUserCloudis extends Component {
 
   render() {
 
+    console.log(this.props)
+
     const { userCloudis } = this.props.cloudi; 
+
+    // console.log(userCloudis)
 
     const userProfileUrl = this.props.match.url;
 
@@ -81,4 +86,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { getAllUserCloudis})(withRouter(withStyles(styles)(AllUserCloudis)));
+export default connect(mapStateToProps, { getAllUserCloudis, handleUserCloudiByID})(withRouter(withStyles(styles)(AllUserCloudis)));

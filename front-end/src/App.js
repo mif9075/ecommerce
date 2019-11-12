@@ -28,7 +28,7 @@ class App extends Component {
           <PrivateRoute exact path="/create-cloudi" component={CreateCloudi} />
           <PrivateRoute exact path="/see-cloudi/:id" component={SeeCloudi} />
           <PrivateRoute exact path="/user-profile" component={UserProfile} />
-          /* <Route Path="" component={NotFound} />
+          <Route Path="" component={NotFound} />
 
         </Switch>
         <Footer />

@@ -22,6 +22,9 @@ const UserSchema = new mongoose.Schema({
         require: true,
         default: ''
     },
+    cloudis: [{
+        type: mongoose.Schema.Types.ObjectId, ref: 'Cloudi'
+    }],
     avatar: {
         type: String,
         default: ''

@@ -13,6 +13,8 @@ class SeeCloudi extends Component {
 
   componentDidMount() {
 
+    console.log(this.props)
+
     if (this.props.location.state !== undefined) {
       this.setState({
         title: this.props.location.state.title,
@@ -24,8 +26,9 @@ class SeeCloudi extends Component {
         isFetching: true
       })
       this.props.getCloudiByID(this.props.match.params.id)
-                .then( cloudi => {
-             
+                
+                .then(cloudi => {
+                    
                   this.setState({
                     title: cloudi.title,
                     image: cloudi.image,
