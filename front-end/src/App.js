@@ -3,17 +3,17 @@ import { Route, Switch, withRouter } from "react-router-dom";
 import "./App.css";
 import { connect } from "react-redux";
 
-import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
-import CreateCloudi from './Components/Pages/CreateCloudi/CreateCloudi';
+import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
+import CreateCloudi from "./Components/Pages/CreateCloudi/CreateCloudi";
 
-const Home   = React.lazy(() => import("./Components/Pages/Home"));
+const Home = React.lazy(() => import("./Components/Pages/Home"));
 const Navbar = React.lazy(() => import("./Components/Layouts/Navbar"));
 const Footer = React.lazy(() => import("./Components/Layouts/Footer"));
 const Signin = React.lazy(() => import("./Components/Pages/Signin"));
 const Signup = React.lazy(() => import("./Components/Pages/Signup"));
-const NotFound = React.lazy(() => import("./Components/Pages/NotFound"))
-const SeeCloudi = React.lazy(() => import("./Components/Pages/SeeCloudi"))
-const UserProfile = React.lazy(() => import("./Components/Pages/UserProfile"))
+const NotFound = React.lazy(() => import("./Components/Pages/NotFound"));
+const SeeCloudi = React.lazy(() => import("./Components/Pages/SeeCloudi"));
+const UserProfile = React.lazy(() => import("./Components/Pages/UserProfile"));
 
 class App extends Component {
   render() {
@@ -25,11 +25,10 @@ class App extends Component {
           <Route exact path="/sign-in" component={Signin} />
           <Route exact path="/sign-up" component={Signup} />
 
-          <PrivateRoute exact path="/create-cloudi" component={CreateCloudi} />
+          <PrivateRoute exact path="/upload" component={CreateCloudi} />
           <PrivateRoute exact path="/see-cloudi/:id" component={SeeCloudi} />
           <PrivateRoute exact path="/user-profile" component={UserProfile} />
           <Route Path="" component={NotFound} />
-
         </Switch>
         <Footer />
       </>
@@ -44,9 +43,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    null
-  )(App)
-);
+export default withRouter(connect(mapStateToProps, null)(App));

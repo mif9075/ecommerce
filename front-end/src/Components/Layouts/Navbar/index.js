@@ -184,8 +184,21 @@ export default function PrimarySearchAppBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem>
+        <NavLink to="user-profile" onClick={handleMenuClose}>
+          Profile
+        </NavLink>
+      </MenuItem>
+      <MenuItem>
+        <NavLink to="albums" onClick={handleMenuClose}>
+          Albums
+        </NavLink>
+      </MenuItem>
+      <MenuItem>
+        <NavLink to="upload" onClick={handleMenuClose}>
+          Upload
+        </NavLink>
+      </MenuItem>
       <MenuItem>
         <NavLink to="/" onClick={handleLogout}>
           Logout
