@@ -5,7 +5,8 @@ import { ValidatorForm } from "react-material-ui-form-validator";
 import Input from "../../../Factory/Input/index";
 import Spinner from "../../../Factory/Spinner/index";
 import { connect } from "react-redux";
-import { createAlbum } from "../../../redux/action/cloudiAction";
+import { createAlbum } from "../../../redux/action/albumAction";
+import AllUserAlbums from "../../Layouts/ShowAllUserAlbums"
 
 
 class CreateAlbum extends Component {
@@ -97,6 +98,9 @@ class CreateAlbum extends Component {
               (!submitted && "Submit")}
               
           </ButtonClass>
+          <br />
+        <hr style={{width: '50%'}}/>
+        <AllUserAlbums />
         </ValidatorForm>
         
         </div>

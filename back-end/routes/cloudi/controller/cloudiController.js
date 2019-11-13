@@ -43,12 +43,12 @@ module.exports = {
     createAlbum: async (req, res) => {
         console.log(req.body.id)
         let id = req.body.id;
-        let title = req.body.title;
+        let name = req.body.title;
 
         try {
             let foundUser = await User.findById(id);
             let newAlbum = await new Album({
-                title: title,
+                name: name,
                 user_id: id
             });
             let savedNewAlbum = await newAlbum.save();
@@ -101,7 +101,9 @@ module.exports = {
         try {
             let allUserAlbums = await User.findById({_id: id}).populate('album').exec();
 
-            res.status(200).json(allUserAlbums.albums)
+            // console.log(allUserAlbums)
+
+            res.status(200).json(allUserAlbums.album)
         } catch (error) {
             console.log(error)
             res.status(500).json(error);
