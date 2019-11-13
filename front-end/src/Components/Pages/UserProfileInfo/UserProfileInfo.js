@@ -4,7 +4,7 @@ import InputClass from '../../../Factory/Input';
 import UserProfileInfoArray from './UserProfileInfoConfig';
 import { ValidatorForm } from 'react-material-ui-form-validator';
 import ButtonClass from '../../../Factory/Button';
-import Spinner from '../../../Factory/Spinner'
+// import Spinner from '../../../Factory/Spinner'
 
 class UserProfileInfo extends Component {
 

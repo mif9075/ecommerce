@@ -31,13 +31,6 @@ const signup = userInfo => async dispatch => {
   }
 };
 
-const handleSignupSuccess = message => dispatch => {
-  dispatch({
-    type: AUTH_SIGNUP_SUCCESSFUL,
-    payload: message
-  });
-};
-
 const logout = () => dispatch => {
   localStorage.removeItem("jwtToken");
   setAuthToken(false);
@@ -45,6 +38,13 @@ const logout = () => dispatch => {
     type: AUTH_USER_LOGOUT
   });
 };
+
+const handleSignupSuccess = message => dispatch => {
+    dispatch({
+      type: AUTH_SIGNUP_SUCCESSFUL,
+      payload: message
+    });
+  };
 
 const setAuthSuccessUser = token => dispatch => {
   dispatch({

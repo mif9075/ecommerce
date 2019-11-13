@@ -1,4 +1,4 @@
-import { CREATE_CLOUDI, ERROR_CREATE_CLOUDI, GET_CLOUDI_BY_ID, GET_ALL_USER_CLOUDIS, DELETE_USER_CLOUDI_BY_ID} from '../actionTypes/index';
+import { CREATE_CLOUDI, CREATE_ALBUM, ERROR_CREATE_CLOUDI, ERROR_CREATE_ALBUM, GET_CLOUDI_BY_ID, GET_ALL_USER_CLOUDIS, DELETE_USER_CLOUDI_BY_ID} from '../actionTypes/index';
 import Axios from '../../lib/Axios';
 
 export const handleUserCloudiByID = (id) => async dispatch => {
@@ -58,6 +58,27 @@ export const createCloudi = (cloudiInfo) => async dispatch => {
     }
 }
 
+export const createAlbum = (albumInfo) => async dispatch => {
+
+    let cloudiObj = {
+        id: albumInfo.id,
+        title: albumInfo.title,
+    }
+
+    try {
+        
+        let success = await Axios.post('/cloudi/create-album', cloudiObj)
+        console.log(success)
+        dispatch(successCreateAlbum(success.data));
+
+        return Promise.resolve(success);
+    } catch (error) {
+        console.log(error)
+        dispatch(errorCreateAlbum(error))
+        return Promise.reject(error);
+    }
+}
+
 const successCreateCloudi = (createdCloudi) => dispatch => {
     dispatch({
         type: CREATE_CLOUDI,
@@ -68,6 +89,20 @@ const successCreateCloudi = (createdCloudi) => dispatch => {
 const errorCreateCloudi = (message) => dispatch => {
     dispatch({
         type: ERROR_CREATE_CLOUDI,
+        payload: message
+    })
+}
+
+const successCreateAlbum = (createdAlbum) => dispatch => {
+    dispatch({
+        type: CREATE_ALBUM,
+        payload: createdAlbum
+    })
+}
+
+const errorCreateAlbum = (message) => dispatch => {
+    dispatch({
+        type: ERROR_CREATE_ALBUM,
         payload: message
     })
 }

@@ -1,4 +1,4 @@
-import { CREATE_CLOUDI, ERROR_CREATE_CLOUDI,  GET_CLOUDI_BY_ID, GET_ALL_USER_CLOUDIS, DELETE_USER_CLOUDI_BY_ID } from '../actionTypes';
+import { CREATE_CLOUDI, ERROR_CREATE_CLOUDI, GET_ALL_CLOUDIS,  GET_CLOUDI_BY_ID, GET_ALL_USER_CLOUDIS, DELETE_USER_CLOUDI_BY_ID } from '../actionTypes';
 
 
 const initialState = {
@@ -23,7 +23,12 @@ export default function(state = initialState, action) {
         ...state, 
         userCloudis: [...action.payload]
       }
-
+    
+    case GET_ALL_CLOUDIS:
+        return {
+            ...state,
+            cloudis: [...action.payload]
+        }
 
     case CREATE_CLOUDI:
       let newCloudisArray = [...state.cloudis, action.payload];
@@ -38,11 +43,13 @@ export default function(state = initialState, action) {
         ...state, 
         cloudi: action.payload
       }  
+
     case ERROR_CREATE_CLOUDI:
       return {
         ...state,
         message: action.payload
       }
+      
     default:
       return state;
   }

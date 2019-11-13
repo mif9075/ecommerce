@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 const moment = require('moment');
 const now = moment();
 
@@ -13,7 +14,7 @@ const AlbumSchema = new mongoose.Schema({
     cloudis: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Cloudi',
-    }]
+    }],
 
     timestamp: {
     type: String,

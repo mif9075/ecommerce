@@ -7,7 +7,11 @@ router.get('/', function(req, res, next) {
     res.send('Cloudi router');
   });
 
+router.get('/get-all-cloudi', passport.authenticate('jwt', { session: false}), cloudiController.getAllCloudis);
+
 router.post('/create-cloudi', passport.authenticate('jwt', {session: false}), cloudiController.createCloudi);
+
+router.post('/create-album', passport.authenticate('jwt', {session: false}), cloudiController.createAlbum);
 
 router.get('/get-cloudi-by-id/:id', passport.authenticate('jwt', {
     session: false}), cloudiController.getCloudiByID);
