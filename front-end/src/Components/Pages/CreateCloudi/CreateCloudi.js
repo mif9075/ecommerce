@@ -6,10 +6,12 @@ import Input from "../../../Factory/Input/index";
 import Spinner from "../../../Factory/Spinner/index";
 import { connect } from "react-redux";
 import { createCloudi } from "../../../redux/action/cloudiAction";
+import ShowAllUserCloudis from '../../Layouts/ShowAllUserCloudi';
 
 class CreateCloudi extends Component {
   state = {
     formData: {
+      album: '',
       title: '',
       image: ''
     },
@@ -71,7 +73,7 @@ class CreateCloudi extends Component {
         this.props.createCloudi(newUserObj)
           .then(() => {
             this.successfullyCreatedCloudi();
-            this.props.history.push('/');
+            this.props.history.push('/upload');
           })
           .catch(error => {
             console.log(error);
@@ -132,6 +134,9 @@ class CreateCloudi extends Component {
         >
           Add Image
         </ButtonClass>
+        <br />
+        <hr style={{width: '50%'}}/>
+        <ShowAllUserCloudis />
       </div>
     );
   }

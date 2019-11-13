@@ -7,6 +7,7 @@ import Spinner from "../../../Factory/Spinner/index";
 import { connect } from "react-redux";
 import { createAlbum } from "../../../redux/action/cloudiAction";
 
+
 class CreateAlbum extends Component {
   state = {
     formData: {
@@ -14,6 +15,7 @@ class CreateAlbum extends Component {
     },
     submitted: false,
   };
+
 
   successfullyCreatedAlbum = () => {
     this.setState({
@@ -44,7 +46,7 @@ class CreateAlbum extends Component {
         this.props.createAlbum(newUserObj)
           .then(() => {
             this.successfullyCreatedAlbum();
-            this.props.history.push('/');
+            this.props.history.push('/upload/');
           })
           .catch(error => {
             console.log(error);
@@ -93,13 +95,17 @@ class CreateAlbum extends Component {
           >
             {(submitted && "Your form is submitted!") ||
               (!submitted && "Submit")}
+              
           </ButtonClass>
         </ValidatorForm>
+        
         </div>
-
+       
     );
+    
   }
 }
+
 
 const mapStateToProps = state => {
   return {

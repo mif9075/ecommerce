@@ -4,7 +4,7 @@ input: {
     type: 'title',
     name: 'title',
     id: 'input-title',
-    label: 'Title',
+    label: 'Album',
     style: {
         width: '250px',
         marginTop: '15px'

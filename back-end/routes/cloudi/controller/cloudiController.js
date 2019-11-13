@@ -16,6 +16,7 @@ module.exports = {
       }
     },
 
+
     createCloudi: async (req, res) => {
         console.log(req.body.id)
         let id = req.body.id;
@@ -89,6 +90,18 @@ module.exports = {
             let allUserCloudis = await User.findById({_id: id}).populate('cloudis').exec();
 
             res.status(200).json(allUserCloudis.cloudis)
+        } catch (error) {
+            console.log(error)
+            res.status(500).json(error);
+        }
+    },
+    getAllUserAlbums: async (req, res) => {
+        const id = req.params.id;
+
+        try {
+            let allUserAlbums = await User.findById({_id: id}).populate('album').exec();
+
+            res.status(200).json(allUserAlbums.albums)
         } catch (error) {
             console.log(error)
             res.status(500).json(error);
