@@ -7,6 +7,7 @@ import Spinner from "../../../Factory/Spinner/index";
 import { connect } from "react-redux";
 import { createCloudi } from "../../../redux/action/cloudiAction";
 import ShowAllUserCloudis from '../../Layouts/ShowAllUserCloudi';
+// import Redirect from 'react-router-dom'
 
 class CreateCloudi extends Component {
   state = {
@@ -74,6 +75,7 @@ class CreateCloudi extends Component {
           .then(() => {
             this.successfullyCreatedCloudi();
             this.props.history.push('/upload');
+            // <Redirect to="/upload" />
           })
           .catch(error => {
             console.log(error);

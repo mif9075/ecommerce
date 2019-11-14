@@ -30,7 +30,7 @@ class ShowAllCloudis extends Component {
     render() {
         return(
             <div>
-                Welcome {this.props.user.username} !
+                Welcome !
                 <br />
                 {
                     this.state.loading ? <Spinner /> : <Cloudis />

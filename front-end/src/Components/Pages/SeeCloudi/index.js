@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getCloudiByID } from '../../../redux/action/cloudiAction';
+import { getAllCloudis } from '../../../redux/action/cloudiAction'
 import Spinner from '../../../Factory/Spinner';
 
 class SeeCloudi extends Component {
@@ -25,7 +26,9 @@ class SeeCloudi extends Component {
       this.setState({
         isFetching: true
       })
-      this.props.getCloudiByID(this.props.match.params.id)
+      this.props.getAllCloudis
+
+    //   (this.props.match.params.id)
                 
                 .then(cloudi => {
                     
@@ -59,4 +62,4 @@ class SeeCloudi extends Component {
   }
 }
 
-export default connect(null, { getCloudiByID })(SeeCloudi);
+export default connect(null, { getAllCloudis })(SeeCloudi);

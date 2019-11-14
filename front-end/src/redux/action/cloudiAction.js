@@ -1,4 +1,4 @@
-import { CREATE_CLOUDI, ERROR_CREATE_CLOUDI, GET_CLOUDI_BY_ID, GET_ALL_USER_CLOUDIS, DELETE_USER_CLOUDI_BY_ID} from '../actionTypes/index';
+import { CREATE_CLOUDI, ERROR_CREATE_CLOUDI, GET_CLOUDI_BY_ID, GET_ALL_USER_CLOUDIS, DELETE_USER_CLOUDI_BY_ID, GET_ALL_CLOUDIS} from '../actionTypes/index';
 
 import Axios from '../../lib/Axios';
 
@@ -19,6 +19,25 @@ export const handleUserCloudiByID = (id) => async dispatch => {
         return Promise.reject(error);
     }
 }
+
+export const getAllCloudis = () => async dispatch => {
+
+    try {
+  
+      let success = await Axios.get(`/cloudi/get-all-cloudis`)
+  
+      dispatch({
+        type: GET_ALL_CLOUDIS,
+        payload: success.data
+      })
+      return Promise.resolve(success.data)
+    } catch (error) {
+      console.log(error)
+      dispatch(errorCreateCloudi(error))
+      return Promise.reject(error);
+    }
+  
+  }
 
 export const getAllUserCloudis = (id) => async dispatch => {
     
