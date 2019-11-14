@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import Album from '../Album'
+import Album from '../Album'
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
@@ -45,29 +45,35 @@ class AllUserAlbums extends Component {
 
         const { userAlbums } = this.props.album;
 
-        // const userProfileUrl = this.props.match.url;
+        let userAlbumsGrid =(
+            <Grid container justify="center"  spacing={1}>
+      {
+        userAlbums.map((album) => {
+          return (
+            <Grid key={album._id}  item>
+              {/* <Album {...album} /> */}
+                <div class="boxed">
+                <h1>Album Name:</h1>
+                <h2>{album.name}</h2>
+                {/* <h3>{album.timestamp}</h3> */}
+                
+                </div>
 
-        let userAlbumsGrid = (
-            <Grid container justify="center" spacing={1}>
-                {
-                    userAlbums.map((album) => {
-                        return (
-                            <Grid key={album._id} item>
-                                <h1>{album.name}</h1>
-                                
-                            </Grid>
-                        )
-                    })
-                }
             </Grid>
+             )
+            })
+          }
+      </Grid>
         )
+
         return (
             <div className={this.props.classes.root}>
                 {this.state.isFetching ? <Spinner /> : userAlbumsGrid}
             </div>
-        )
+          )
+        }
     }
-}
+        
 
 const mapStateToProps = (state) => {
     return {

@@ -26,16 +26,16 @@ class Album extends Component {
         user: true
 
     }
-    
 
     render() {
 
         return(
-            
             <Card className={this.props.classes.card}>
-            <CardActionArea>
+            {/* <CardActionArea>
               <CardMedia
+                
                 className={this.props.classes.media}
+                image={this.props.image}
                 title="Album"
               />
               <CardContent>
@@ -43,23 +43,24 @@ class Album extends Component {
                   {this.props.title}
                 </Typography>
               </CardContent>
-            </CardActionArea>
+            </CardActionArea> */}
             <CardActions>
             {
               !this.props.userProfileUrl ? (
                 <Button size="small" color="primary">
                   <Link
                     to={{
-                      pathname: `/see-album/${this.props._id}`,
+                      pathname: `/albums/${this.props._id}`,
                       state: {
                         id: this.props._id,
                         title: this.props.title,
+                        image: this.props.image
                       }
                     }}
                   >Learn More</Link>
                 </Button>
               ) : (
-                <Button size="small" color="primary" onClick={() => this.props.handleUserAlbumByID(this.props._id)}>
+                <Button size="small" color="primary" onClick={() => this.props.handleUserCloudiByID(this.props._id)}>
                   Delete
                 </Button>
               )

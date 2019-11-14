@@ -47,7 +47,7 @@ class CreateAlbum extends Component {
         this.props.createAlbum(newUserObj)
           .then(() => {
             this.successfullyCreatedAlbum();
-            this.props.history.push('/upload/');
+            this.props.history.push('/albums');
           })
           .catch(error => {
             console.log(error);

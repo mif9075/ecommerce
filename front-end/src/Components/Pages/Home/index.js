@@ -5,7 +5,7 @@ export default class Home extends Component {
     return (
         <div>
             <br />
-            <h1>Welcome the PicHub!!!</h1>
+            <h1>Welcome to PicHub!!!</h1>
         </div>
     )
   }
