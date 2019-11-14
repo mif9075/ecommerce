@@ -15,6 +15,9 @@ const Signup = React.lazy(() => import("./Components/Pages/Signup"));
 const NotFound = React.lazy(() => import("./Components/Pages/NotFound"));
 const SeeCloudi = React.lazy(() => import("./Components/Pages/SeeCloudi"));
 const UserProfile = React.lazy(() => import("./Components/Pages/UserProfile"));
+const SearchResult = React.lazy(() =>
+  import("./Components/Pages/SearchResult")
+);
 
 class App extends Component {
   render() {
@@ -25,9 +28,10 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/sign-in" component={Signin} />
           <Route exact path="/sign-up" component={Signup} />
+          <Route exact path="/search-result" component={SearchResult} />
 
           <PrivateRoute exact path="/upload" component={CreateCloudi} />
-          <PrivateRoute exact path="/albums" component= {CreateAlbum} />
+          <PrivateRoute exact path="/albums" component={CreateAlbum} />
           <PrivateRoute exact path="/see-cloudi/:id" component={SeeCloudi} />
           <PrivateRoute exact path="/user-profile" component={UserProfile} />
           <Route Path="" component={NotFound} />

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -16,6 +17,9 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { NavLink } from "react-router-dom";
 import { logout } from "../../../redux/action/authUserAction";
+import { ValidatorForm } from "react-material-ui-form-validator";
+// import Input from "../../../Factory/Input";
+import { submitSearch } from "../../../redux/action/searchAction";
 
 const useStyles = makeStyles(theme => ({
   navLinkStyle: {
@@ -87,7 +91,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar(props) {
+  const [searchInput, setSearchInput] = useState({
+    searchInput: ""
+  });
+
+  let history = useHistory();
+
+  useSelector(state => console.log(state.search));
+
   const classes = useStyles();
   const activeStyles = { color: "white", textDecoration: "underline white" };
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -119,6 +131,23 @@ export default function PrimarySearchAppBar() {
     dispatch(logout());
     handleMenuClose();
   };
+
+  const handleSubmit = () => {
+    console.log("search submit");
+    dispatch(submitSearch(searchInput));
+    setSearchInput({ searchInput: "" });
+    history.push("/search-result");
+  };
+
+  const handleInput = event => {
+    event.preventDefault();
+    setSearchInput({
+      searchInput: event.target.value
+    });
+
+    // console.log(event.target.value);
+  };
+  console.log(searchInput);
 
   const menuId = "primary-search-account-menu";
   const renderSignin = () => {
@@ -266,14 +295,18 @@ export default function PrimarySearchAppBar() {
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput
-              }}
-              inputProps={{ "aria-label": "search" }}
-            />
+            <ValidatorForm className="Form" onSubmit={handleSubmit}>
+              <InputBase
+                value={searchInput.searchInput}
+                onChange={handleInput}
+                placeholder="Search User or Album ..."
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput
+                }}
+                inputProps={{ "aria-label": "search" }}
+              />
+            </ValidatorForm>
           </div>
           <div className={classes.grow} />
           {renderSignin()}
