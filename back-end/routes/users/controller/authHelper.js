@@ -1,5 +1,5 @@
 const User = require("../model/User");
-const Album = require("../../cloudi/model/Album");
+const Album = require("../../album/model/Album");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const gravatar = require("gravatar");

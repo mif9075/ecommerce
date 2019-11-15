@@ -1,6 +1,6 @@
 const Cloudi = require('../model/Cloudi');
 const User = require('../../users/model/User');
-const Album = require('../model/Album')
+// const Album = require('../model/Album')
 
 module.exports = {
 
@@ -22,39 +22,20 @@ module.exports = {
         let id = req.body.id;
         let title = req.body.title;
         let image = req.body.image;
+        let album = req.body.album;
 
         try {
             let foundUser = await User.findById(id);
             let newCloudi = await new Cloudi({
                 title: title,
                 image: image,
-                user_id: id
+                user_id: id,
+                album: album
             });
             let savedNewCloudi = await newCloudi.save();
             await foundUser.cloudis.push(savedNewCloudi);
             await foundUser.save();
             res.status(200).json(savedNewCloudi);
-        } catch (error) {
-            // console.log(error)
-            res.status(500).json(error);
-        }
-    },
-
-    createAlbum: async (req, res) => {
-        console.log(req.body.id)
-        let id = req.body.id;
-        let name = req.body.title;
-
-        try {
-            let foundUser = await User.findById(id);
-            let newAlbum = await new Album({
-                name: name,
-                user_id: id
-            });
-            let savedNewAlbum = await newAlbum.save();
-            await foundUser.album.push(savedNewAlbum);
-            await foundUser.save();
-            res.status(200).json(savedNewAlbum);
         } catch (error) {
             // console.log(error)
             res.status(500).json(error);
@@ -90,20 +71,6 @@ module.exports = {
             let allUserCloudis = await User.findById({_id: id}).populate('cloudis').exec();
 
             res.status(200).json(allUserCloudis.cloudis)
-        } catch (error) {
-            console.log(error)
-            res.status(500).json(error);
-        }
-    },
-    getAllUserAlbums: async (req, res) => {
-        const id = req.params.id;
-
-        try {
-            let allUserAlbums = await User.findById({_id: id}).populate('album').exec();
-
-            // console.log(allUserAlbums)
-
-            res.status(200).json(allUserAlbums.album)
         } catch (error) {
             console.log(error)
             res.status(500).json(error);

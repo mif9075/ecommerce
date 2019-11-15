@@ -4,7 +4,7 @@ import Axios from '../../lib/Axios';
 
 export const getAllUserAlbums = (id) => async dispatch => {
     try {
-        let foundAllUserAlbums = await Axios.get(`/cloudi/get-all-user-albums/${id}`)
+        let foundAllUserAlbums = await Axios.get(`/album/get-all-user-albums/${id}`)
         console.log(foundAllUserAlbums)
 
         dispatch({
@@ -30,7 +30,7 @@ export const createAlbum = (albumInfo) => async dispatch => {
 
     try {
         
-        let success = await Axios.post('/cloudi/create-album', cloudiObj)
+        let success = await Axios.post('/album/create-album', cloudiObj)
         console.log(success)
         dispatch(successCreateAlbum(success.data));
 
