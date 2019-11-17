@@ -117,21 +117,24 @@ const Input = props => {
     case "select":
       dynamicInputField = (
         <FormControl style={input.style}>
-          <InputLabel htmlFor="input-gende" style={{ top: "-15px" }}>
-            {props.gender.length > 1 ? "" : "Choose Your Gender"}
+          <InputLabel htmlFor="input-album" style={{ top: "-15px" }}>
+            {props.album ? "" : "Select Album"}
+            {/* {props.albums.length > 0
+              ? "Choose Album"
+              : "Please Create an Album"} */}
           </InputLabel>
-          SelectorValidator
+          {/* Albums */}
           <SelectValidator
-            value={props.gender || ""}
+            value={props.album || ""}
             onChange={props.handleInputChange}
             validators={input.validators}
             errorMessages={input.errorMessages}
             name={input.name}
           >
-            {input.genders.map(option => {
+            {props.albums.map(option => {
               return (
-                <MenuItem key={option} value={option}>
-                  {option}
+                <MenuItem key={option.name} value={option.name}>
+                  {option.name}
                 </MenuItem>
               );
             })}

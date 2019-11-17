@@ -2,10 +2,12 @@ import {
   AUTH_USER_SUCCESSFUL,
   AUTH_USER_LOGOUT,
   AUTH_SIGNUP_SUCCESSFUL,
-  AUTH_USER_FAILURE
+  AUTH_USER_FAILURE,
+  USER_SIGNOUT
 } from "../actionTypes";
 import Axios from "../../lib/Axios";
 import setAuthToken from "../../lib/setAuthToken";
+import { getUser } from "./userAction";
 
 const signin = userInfo => async dispatch => {
   try {
@@ -13,6 +15,7 @@ const signin = userInfo => async dispatch => {
     const { token } = success.data;
     dispatch(setAuthSuccessUser(token));
     setAuthToken(token);
+    dispatch(getUser(userInfo.email));
     localStorage.setItem("jwtToken", token);
     return Promise.resolve("Signin Successful!");
   } catch (error) {
@@ -37,14 +40,17 @@ const logout = () => dispatch => {
   dispatch({
     type: AUTH_USER_LOGOUT
   });
+  dispatch({
+    type: USER_SIGNOUT
+  });
 };
 
 const handleSignupSuccess = message => dispatch => {
-    dispatch({
-      type: AUTH_SIGNUP_SUCCESSFUL,
-      payload: message
-    });
-  };
+  dispatch({
+    type: AUTH_SIGNUP_SUCCESSFUL,
+    payload: message
+  });
+};
 
 const setAuthSuccessUser = token => dispatch => {
   dispatch({

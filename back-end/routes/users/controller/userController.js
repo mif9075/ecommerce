@@ -29,7 +29,6 @@ module.exports = {
       if (foundUser === 404) {
         throw "User not found, please sign up";
       }
-      console.log(foundUser);
       let comparePassword = await authHelper.comparePassword(
         req.body.password,
         foundUser.password,
@@ -52,9 +51,40 @@ module.exports = {
   search: async (req, res) => {
     try {
       let foundUserOrAlbum = await authHelper.findUserOrAlbum(req.body.search);
-      // console.log(foundUserOrAlbum);
-      console.log("we in it");
       res.status(200).json(foundUserOrAlbum);
+    } catch (error) {
+      res.status(500).json({
+        message: error
+      });
+    }
+  },
+  getUser: async (req, res) => {
+    try {
+      let response = await authHelper.findOneUser(req.body.email);
+      user = {
+        id: response.id,
+        username: response.username,
+        email: response.email,
+        cloudis: response.cloudis,
+        avatar: response.avatar,
+        timestamp: response.timestamp,
+        album: response.album
+      };
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(500).json({
+        message: error
+      });
+    }
+  },
+
+  test: async (req, res) => {
+    try {
+      let foundUser = await authHelper.test();
+      if (foundUser === 404) {
+        throw "User not found, please sign up";
+      }
+      res.status(200).json(foundUser);
     } catch (error) {
       res.status(500).json({
         message: error

@@ -5,6 +5,14 @@ export const AUTH_SIGNUP_SUCCESSFUL = "AUTH_SIGNUP_SUCCESSFUL";
 export const AUTH_USER_FAILURE = "AUTH_USER_FAILURE";
 export const AUTH_USER_LOGOUT = "AUTH_USER_LOGOUT";
 
+//userReducer
+
+export const USER_SIGNEDIN = "USER_SIGNEDIN";
+export const USER_SIGNOUT = "USER_SIGNOUT";
+export const USER_CHECK = "USER_CHECK";
+export const USER_REFRESH = "USER_REFRESH";
+export const USER_UPDATE = "USER_UPDATE";
+
 //handleMessageReducer
 
 //cloudiReducer
