@@ -22,7 +22,6 @@ module.exports = {
 
     try {
       let foundUser = await User.findById(id);
-      let foundAlbum = await Album.findById(album);
       let newCloudi = await new Cloudi({
         title: title,
         image: image,
@@ -32,11 +31,16 @@ module.exports = {
       let savedNewCloudi = await newCloudi.save();
       await foundUser.cloudis.push(savedNewCloudi);
       await foundUser.save();
-      await foundAlbum.cloudis.push(album);
+      console.log(album);
+      console.log(savedNewCloudi);
+
+      let foundAlbum = await Album.findById(album);
+      await foundAlbum.cloudis.push(savedNewCloudi);
       await foundAlbum.save();
+
       res.status(200).json(savedNewCloudi);
     } catch (error) {
-      // console.log(error)
+      console.log(error);
       res.status(500).json(error);
     }
   },
@@ -53,8 +57,15 @@ module.exports = {
   deleteByID: async (req, res) => {
     const id = req.params.id;
 
+    const user = req.params.user;
+
     try {
       let deleteByID = await Cloudi.findByIdAndRemove(id);
+
+      let user1 = await User.findOne({ _id: user });
+      let cloudiIndex = await user1.cloudis.indexOf(id);
+      await user1.cloudis.splice(cloudiIndex, 1);
+      await user1.save();
 
       res.status(200).json(deleteByID);
     } catch (error) {

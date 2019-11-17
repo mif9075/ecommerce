@@ -16,10 +16,10 @@ class Albums extends Component {
     render() {
 
         const { albums } = this.props.album;
-        console.log(this.props);
+        // console.log(this.props);
 
         return (
-            <div clasName={this.props.classes.root}>
+            <div className={this.props.classes.root}>
                 <Grid container justify="center" spacing={1}>
                     {
                         albums.map((album) => {
@@ -33,7 +33,13 @@ class Albums extends Component {
                 </Grid>
             </div>
         )
-
-
     }
 }
+
+const mapStateToProps = state => {
+    return {
+        album: state.album
+    }
+}
+
+export default connect(mapStateToProps, null)(withStyles(styles)(Albums));

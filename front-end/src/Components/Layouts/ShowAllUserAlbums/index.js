@@ -27,7 +27,7 @@ class AllUserAlbums extends Component {
       isFetching: true
     })
 
-    console.log(this.props)
+    // console.log(this.props)
 
     this.props.getAllUserAlbums(this.props.authUser.user.id)
         .then( allUserAlbums => {
@@ -56,7 +56,7 @@ class AllUserAlbums extends Component {
       { userAlbums.map((album) => {
           return (
             <Grid key={album._id}  item>
-            <h1>{album.name}</h1>
+            
               <Album {...album} 
                 userProfileUrl={userProfileUrl}
                 deleteUserAlbumByID={this.props.deleteUserAlbumByID}

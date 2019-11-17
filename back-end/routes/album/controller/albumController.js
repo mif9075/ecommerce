@@ -5,7 +5,7 @@ const User = require("../../users/model/User");
 module.exports = {
   getAllAlbums: async (req, res) => {
     try {
-      let allAlbums = await allAlbums.find({});
+      let allAlbums = await Album.find({});
 
       res.status(200).json(allAlbums);
     } catch (error) {
