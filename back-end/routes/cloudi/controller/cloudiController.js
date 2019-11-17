@@ -62,6 +62,18 @@ module.exports = {
             console.log(error) 
             res.status(500).json(error)
         }
+
+        try {
+            let deletedfromUser = await 
+            User.album.findByIdAndRemove(id);
+            console.log(deletedfromUser)
+
+            res.status(200).json(deletedfromUser)
+        } catch (error) {
+            console.log(error)
+            res.status(500).json(error)
+        }
+        
     },
     getAllUserCloudis: async (req, res) => {
 
