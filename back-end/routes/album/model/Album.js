@@ -4,7 +4,7 @@ const moment = require("moment");
 const now = moment();
 
 const AlbumSchema = new mongoose.Schema({
-  name: { type: String, uniquer: true, lowercase: true },
+  name: { type: String, uniquer: true },
 
   user_id: {
     type: Schema.Types.ObjectId,
