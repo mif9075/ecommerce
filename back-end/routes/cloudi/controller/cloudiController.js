@@ -1,6 +1,6 @@
 const Cloudi = require("../model/Cloudi");
 const User = require("../../users/model/User");
-// const Album = require('../model/Album')
+const Album = require("../../album/model/Album");
 
 module.exports = {
   getAllCloudis: async (req, res) => {
@@ -22,6 +22,7 @@ module.exports = {
 
     try {
       let foundUser = await User.findById(id);
+      let foundAlbum = await Album.findById(album);
       let newCloudi = await new Cloudi({
         title: title,
         image: image,
@@ -31,6 +32,8 @@ module.exports = {
       let savedNewCloudi = await newCloudi.save();
       await foundUser.cloudis.push(savedNewCloudi);
       await foundUser.save();
+      await foundAlbum.cloudis.push(album);
+      await foundAlbum.save();
       res.status(200).json(savedNewCloudi);
     } catch (error) {
       // console.log(error)

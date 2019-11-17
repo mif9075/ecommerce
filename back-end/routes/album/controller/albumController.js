@@ -14,6 +14,9 @@ module.exports = {
     }
   },
 
+  //   albumAddCloudi: async (req, res) => {
+  //   }
+
   createAlbum: async (req, res) => {
     let id = req.body.id;
     let name = req.body.title;
@@ -46,26 +49,23 @@ module.exports = {
   },
 
   deleteByID: async (req, res) => {
-    const id = req.params.id
+    const id = req.params.id;
 
-
-    const user = req.params.user
+    const user = req.params.user;
 
     try {
       let deletedByID = await Album.findByIdAndRemove(id);
 
-      let user1 = await User.findOne({_id: user})
-      let albumIndex =  await user1.album.indexOf(id);
-        await user1.album.splice(albumIndex, 1);
-        await user1.save()
+      let user1 = await User.findOne({ _id: user });
+      let albumIndex = await user1.album.indexOf(id);
+      await user1.album.splice(albumIndex, 1);
+      await user1.save();
 
-        res.status(200).json(deletedByID);
-
-             } catch (error) {
+      res.status(200).json(deletedByID);
+    } catch (error) {
       console.log(error);
       res.status(500).json(error);
     }
-
   },
 
   getAllUserAlbums: async (req, res) => {

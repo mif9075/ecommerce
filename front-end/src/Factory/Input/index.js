@@ -119,9 +119,6 @@ const Input = props => {
         <FormControl style={input.style}>
           <InputLabel htmlFor="input-album" style={{ top: "-15px" }}>
             {props.album ? "" : "Select Album"}
-            {/* {props.albums.length > 0
-              ? "Choose Album"
-              : "Please Create an Album"} */}
           </InputLabel>
           {/* Albums */}
           <SelectValidator
