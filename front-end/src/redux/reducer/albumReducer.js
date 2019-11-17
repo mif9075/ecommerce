@@ -1,4 +1,4 @@
-import { CREATE_ALBUM, ERROR_CREATE_ALBUM, GET_ALL_USER_ALBUMS } from '../actionTypes';
+import { CREATE_ALBUM, ERROR_CREATE_ALBUM, GET_ALL_USER_ALBUMS, GET_ALBUMS_BY_ID, DELETE_USER_ALBUMS_BY_ID } from '../actionTypes';
 
 const initialState = {
     album: null,
@@ -10,11 +10,24 @@ const initialState = {
 export default function(state = initialState, action) {
     switch (action.type) {
 
+    case DELETE_USER_ALBUMS_BY_ID: 
+        let newUserAlbumArray = state.userAlbums.filter(album => album._id !== action.id)
+        return {
+            ...state,
+            userAlbums: newUserAlbumArray
+        }
+
     case GET_ALL_USER_ALBUMS:
         return {
         ...state,
         userAlbums: [...action.payload]
                 }
+    
+    case GET_ALBUMS_BY_ID: 
+        return {
+            ...state,
+            albums: [...action.payload]
+        }
         
     case CREATE_ALBUM: 
         let newAlbumsArray = [...state.albums,
