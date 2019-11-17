@@ -15,6 +15,6 @@ router.get('/get-album-by-id:id', passport.authenticate('jwt', {session: false})
 
 router.get('/get-all-user-albums/:id', passport.authenticate('jwt', {session: false}), albumController.getAllUserAlbums);
 
-router.delete('/delete-by-id/:id', passport.authenticate('jwt', {session: false}), albumController.deleteByID);
+router.delete('/delete-by-id/:id/:user', passport.authenticate('jwt', {session: false}), albumController.deleteByID);
 
 module.exports = router;

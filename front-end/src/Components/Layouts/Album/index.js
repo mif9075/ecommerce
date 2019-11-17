@@ -11,12 +11,12 @@ import { Link } from 'react-router-dom';
 
 const styles = {
   card: {
-    width: 350,
+    width: 100,
     padding: 48
 
   },
   media: {
-    height: 350,
+    height: 100,
   }
 }
 
@@ -28,8 +28,11 @@ class Album extends Component {
 
   render() {
 
+    // console.log(this.props.user_id)
 
     return(
+
+        
         
       <Card className={this.props.classes.card}>
       <CardActionArea>
@@ -64,7 +67,7 @@ class Album extends Component {
             >Learn More</Link>
           </Button>
         ) : (
-          <Button size="small" color="primary" onClick={() => this.props.deleteUserAlbumByID(this.props._id)}>
+          <Button size="small" color="primary" onClick={() => this.props.deleteUserAlbumByID(this.props._id, this.props.user_id)}>
             Delete
           </Button>
         )

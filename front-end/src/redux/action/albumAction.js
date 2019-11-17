@@ -9,14 +9,14 @@ import {
 
 import Axios from "../../lib/Axios";
 
-export const deleteUserAlbumByID = id => async dispatch => {
+export const deleteUserAlbumByID = (id, user_id) => async dispatch => {
   try {
-    let deletedByID = await Axios.delete(`/album/delete-by-id/${id}`);
+    let deletedByID = await Axios.delete(`/album/delete-by-id/${id}/${user_id}`);
 
     dispatch({
       type: DELETE_USER_ALBUMS_BY_ID,
       payload: deletedByID,
-      id
+      id, user_id
     });
   } catch (error) {
     console.log(error);
