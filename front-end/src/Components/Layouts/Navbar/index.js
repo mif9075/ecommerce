@@ -98,7 +98,7 @@ export default function PrimarySearchAppBar(props) {
 
   let history = useHistory();
 
-  useSelector(state => console.log(state.search));
+  // useSelector(state => console.log(state.search));
 
   const classes = useStyles();
   const activeStyles = { color: "white", textDecoration: "underline white" };
@@ -133,7 +133,6 @@ export default function PrimarySearchAppBar(props) {
   };
 
   const handleSubmit = () => {
-    console.log("search submit");
     dispatch(submitSearch(searchInput));
     setSearchInput({ searchInput: "" });
     history.push("/search-result");
@@ -144,10 +143,7 @@ export default function PrimarySearchAppBar(props) {
     setSearchInput({
       searchInput: event.target.value
     });
-
-    // console.log(event.target.value);
   };
-  console.log(searchInput);
 
   const menuId = "primary-search-account-menu";
   const renderSignin = () => {

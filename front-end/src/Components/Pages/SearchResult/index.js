@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 
 class SearchResult extends Component {
   render() {
-    console.log(this.props.searchResults);
-
     let display = <div></div>;
     if (this.props.searchResults === 404) {
       display = (

@@ -117,7 +117,6 @@ export default function SignIn(props) {
     return inputs;
   };
 
-  // console.log(resource);
   const classes = useStyles();
   return (
     <Container component="main" maxWidth="xs">

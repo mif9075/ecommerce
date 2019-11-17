@@ -6,31 +6,28 @@ import Input from "../../../Factory/Input/index";
 import Spinner from "../../../Factory/Spinner/index";
 import { connect } from "react-redux";
 import { createAlbum } from "../../../redux/action/albumAction";
-import AllUserAlbums from "../../Layouts/ShowAllUserAlbums"
-
+import AllUserAlbums from "../../Layouts/ShowAllUserAlbums";
 
 class CreateAlbum extends Component {
   state = {
     formData: {
-      title: '',
+      title: ""
     },
-    submitted: false,
+    submitted: false
   };
-
 
   successfullyCreatedAlbum = () => {
     this.setState({
       submitted: false,
       formData: {
-        email: '',
-        password: ''
+        email: "",
+        password: ""
       }
-    })
-  }
+    });
+  };
 
   handleSubmit = event => {
     event.preventDefault();
-    // console.log(event)
 
     this.setState(
       {
@@ -38,16 +35,14 @@ class CreateAlbum extends Component {
       },
       () => {
         let newUserObj = Object.assign({}, this.state.formData);
-        // console.log(newUserObj)
 
         newUserObj.id = this.props.authUser.user.id;
 
-        // console.log(this.props)
-
-        this.props.createAlbum(newUserObj)
+        this.props
+          .createAlbum(newUserObj)
           .then(() => {
             this.successfullyCreatedAlbum();
-            this.props.history.push('/albums');
+            this.props.history.push("/albums");
           })
           .catch(error => {
             console.log(error);
@@ -55,7 +50,8 @@ class CreateAlbum extends Component {
               submitted: false
             });
           });
-      });
+      }
+    );
   };
 
   handleChange = event => {
@@ -96,20 +92,15 @@ class CreateAlbum extends Component {
           >
             {(submitted && "Your form is submitted!") ||
               (!submitted && "Submit")}
-              
           </ButtonClass>
           <br />
-        <hr style={{width: '50%'}}/>
-        <AllUserAlbums />
+          <hr style={{ width: "50%" }} />
+          <AllUserAlbums />
         </ValidatorForm>
-        
-        </div>
-       
+      </div>
     );
-    
   }
 }
-
 
 const mapStateToProps = state => {
   return {
@@ -117,7 +108,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { createAlbum }
-)(CreateAlbum);
+export default connect(mapStateToProps, { createAlbum })(CreateAlbum);

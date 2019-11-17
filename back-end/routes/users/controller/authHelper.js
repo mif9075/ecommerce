@@ -36,7 +36,24 @@ async function errorHandler(error) {
 
 async function findOneUser(email) {
   try {
-    let foundUser = await User.findOne({ email });
+    let foundUser = await User.findOne({ email }).populate("album", "name");
+    if (!foundUser) {
+      return 404;
+    }
+    return foundUser;
+  } catch (error) {
+    return error;
+  }
+}
+
+async function test() {
+  try {
+    let foundUser = await User.find({ username: "z" }).populate({
+      path: "cloudis"
+      // populate: {
+      //   path: "user_id"
+      // }
+    });
     if (!foundUser) {
       return 404;
     }
@@ -95,5 +112,6 @@ module.exports = {
   findOneUser,
   createJwtToken,
   comparePassword,
-  findUserOrAlbum
+  findUserOrAlbum,
+  test
 };

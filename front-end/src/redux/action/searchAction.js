@@ -4,9 +4,7 @@ import Axios from "../../lib/Axios";
 export const submitSearch = searchTerm => async dispatch => {
   try {
     const search = { search: searchTerm.searchInput };
-    console.log(search);
     let success = await Axios.post("users/search", search);
-    console.log(success);
 
     dispatch({
       type: SUBMIT_SEARCH,

@@ -1,6 +1,7 @@
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./setAuthToken";
 import { setAuthSuccessUser, logout } from "../redux/action/authUserAction";
+import { getUser } from "../redux/action/userAction";
 
 const checkTokenAuth = store => {
   let jwtToken = localStorage.getItem("jwtToken");
@@ -10,6 +11,7 @@ const checkTokenAuth = store => {
     setAuthToken(jwtToken);
     decoded = jwt_decode(jwtToken);
     store.dispatch(setAuthSuccessUser(jwtToken));
+    store.dispatch(getUser(decoded.email));
     const currentTime = Date.now() / 1000;
     if (decoded.exp < currentTime) {
       store.dispatch(logout());
