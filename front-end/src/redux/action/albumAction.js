@@ -30,7 +30,7 @@ export const getAllUserAlbums = id => async dispatch => {
     let foundAllUserAlbums = await Axios.get(
       `/album/get-all-user-albums/${id}`
     );
-    console.log(foundAllUserAlbums);
+    // console.log(foundAllUserAlbums);
 
     dispatch({
       type: GET_ALL_USER_ALBUMS,
@@ -65,7 +65,7 @@ export const createAlbum = albumInfo => async dispatch => {
 
 export const getAllAlbums = () => async dispatch => {
   try {
-    let success = await Axios.get(`/album/get-all-albums`);
+    let success = await Axios.get('/album/get-all-albums');
 
     dispatch({
       type: GET_ALL_ALBUMS,

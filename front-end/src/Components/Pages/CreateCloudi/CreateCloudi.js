@@ -33,7 +33,7 @@ class CreateCloudi extends Component {
           console.log(error);
         } else {
           if (result.event === "success") {
-            console.log(result.info.secure_url);
+            // console.log(result.info.secure_url);
             const { formData } = this.state;
             formData["image"] = result.info.secure_url;
             this.setState({

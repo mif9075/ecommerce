@@ -1,4 +1,4 @@
-import { CREATE_ALBUM, ERROR_CREATE_ALBUM, GET_ALL_USER_ALBUMS, GET_ALBUMS_BY_ID, DELETE_USER_ALBUMS_BY_ID } from '../actionTypes';
+import { CREATE_ALBUM, ERROR_CREATE_ALBUM, GET_ALL_USER_ALBUMS, GET_ALBUMS_BY_ID, DELETE_USER_ALBUMS_BY_ID, GET_ALL_ALBUMS } from '../actionTypes';
 
 const initialState = {
     album: null,
@@ -22,6 +22,12 @@ export default function(state = initialState, action) {
         ...state,
         userAlbums: [...action.payload]
                 }
+    
+    case GET_ALL_ALBUMS:
+        return {
+            ...state,
+            albums: [...action.payload]
+        }
     
     case GET_ALBUMS_BY_ID: 
         return {

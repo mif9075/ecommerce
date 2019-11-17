@@ -16,7 +16,7 @@ const styles = {
 
   },
   media: {
-    height: 100,
+    height: 50,
   }
 }
 
@@ -28,7 +28,7 @@ class Album extends Component {
 
   render() {
 
-    // console.log(this.props.user_id)
+    console.log(this.props)
 
     return(
 
@@ -43,7 +43,8 @@ class Album extends Component {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {this.props.title}
+            <h2>Album:</h2>
+            {this.props.name}
           </Typography>
           <Typography variant="body2" color="textSecondary" noWrap>
             {this.props.album}
