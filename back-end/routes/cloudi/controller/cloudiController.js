@@ -1,6 +1,6 @@
 const Cloudi = require("../model/Cloudi");
 const User = require("../../users/model/User");
-// const Album = require('../model/Album')
+const Album = require('../../album/model/Album')
 
 module.exports = {
   getAllCloudis: async (req, res) => {
@@ -31,6 +31,11 @@ module.exports = {
       let savedNewCloudi = await newCloudi.save();
       await foundUser.cloudis.push(savedNewCloudi);
       await foundUser.save();
+
+      let findAlbum = await Album.findOne({_id: album})
+      await findAlbum.cloudi.push(savedNewCloudi);
+      await findAlbum.save();
+
       res.status(200).json(savedNewCloudi);
     } catch (error) {
       // console.log(error)
@@ -50,10 +55,18 @@ module.exports = {
   deleteByID: async (req, res) => {
     const id = req.params.id;
 
+    const user = req.params.user;
+
     try {
       let deleteByID = await Cloudi.findByIdAndRemove(id);
 
-      res.status(200).json(deleteByID);
+      let user1 = await User.findOne({_id: user});
+      let cloudiIndex = await user1.cloudis.indexOf(id);
+        await user1.cloudis.splice(cloudiIndex, 1);
+        await user1.save();
+
+     res.status(200).json(deleteByID);
+
     } catch (error) {
       console.log(error);
       res.status(500).json(error);

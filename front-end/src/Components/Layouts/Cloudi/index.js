@@ -59,7 +59,7 @@ class Cloudi extends Component {
             <Button
               size="small"
               color="primary"
-              onClick={() => this.props.handleUserCloudiByID(this.props._id)}
+              onClick={() => this.props.handleUserCloudiByID(this.props._id, this.props.user_id)}
             >
               Delete
             </Button>

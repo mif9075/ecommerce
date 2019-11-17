@@ -60,7 +60,6 @@ class Album extends Component {
                 state: {
                   id: this.props._id,
                   title: this.props.title,
-                  talk: this.props.talk,
                   image: this.props.image
                 }
               }}
