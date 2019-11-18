@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import ButtonClass from "../../../Factory/Button/";
-import formArray from "./CreateCloudiConfig";
+import ButtonClass from "../../../Factory/Button";
+import formArray from "./CloudiFormConfig";
 import { ValidatorForm } from "react-material-ui-form-validator";
 import Input from "../../../Factory/Input/index";
 import Spinner from "../../../Factory/Spinner/index";
 import { connect } from "react-redux";
 import { createCloudi } from "../../../redux/action/cloudiAction";
-import ShowAllUserCloudis from "../../Layouts/ShowAllUserCloudi";
+// import ShowAllUserCloudis from "../../Layouts/ShowAllUserCloudi";
 // import Redirect from 'react-router-dom'
 
 class CreateCloudi extends Component {
@@ -142,9 +142,6 @@ class CreateCloudi extends Component {
         >
           Add Image
         </ButtonClass>
-        <br />
-        <hr style={{ width: "50%" }} />
-        <ShowAllUserCloudis />
       </div>
     );
   }

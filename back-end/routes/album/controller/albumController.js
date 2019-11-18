@@ -34,7 +34,7 @@ module.exports = {
       await foundUser.save();
       res.status(200).json(savedNewAlbum);
     } catch (error) {
-      // console.log(error)
+      console.log(error);
       res.status(500).json(error);
     }
   },
@@ -42,7 +42,7 @@ module.exports = {
   getAlbumByID: async (req, res) => {
     const id = req.params.id;
     try {
-      let foundAlbum = await Album.findById({ _id: id });
+      let foundAlbum = await Album.findById({ _id: id }).populate("cloudis");
       res.status(200).json(foundAlbum);
     } catch (error) {
       console.log(error);
@@ -77,8 +77,6 @@ module.exports = {
       let allUserAlbums = await User.findById({ _id: id })
         .populate("album")
         .exec();
-
-      // console.log(allUserAlbums)
 
       res.status(200).json(allUserAlbums.album);
     } catch (error) {

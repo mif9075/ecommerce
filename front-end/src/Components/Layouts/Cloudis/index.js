@@ -14,7 +14,6 @@ const styles = {
 class Cloudis extends Component {
   render() {
     const { cloudis } = this.props.cloudi;
-    // console.log(cloudis);
 
     return (
       <div className={this.props.classes.root}>

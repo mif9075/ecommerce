@@ -31,8 +31,6 @@ module.exports = {
       let savedNewCloudi = await newCloudi.save();
       await foundUser.cloudis.push(savedNewCloudi);
       await foundUser.save();
-      console.log(album);
-      console.log(savedNewCloudi);
 
       let foundAlbum = await Album.findById(album);
       await foundAlbum.cloudis.push(savedNewCloudi);

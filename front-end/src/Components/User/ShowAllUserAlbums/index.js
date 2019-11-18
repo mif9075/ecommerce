@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Album from "../Album";
+import AlbumCard from "../../Cards/AlbumCardPriv";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
@@ -52,7 +52,7 @@ class AllUserAlbums extends Component {
         {userAlbums.map(album => {
           return (
             <Grid key={album._id} item>
-              <Album
+              <AlbumCard
                 {...album}
                 userProfileUrl={userProfileUrl}
                 deleteUserAlbumByID={this.props.deleteUserAlbumByID}

@@ -7,13 +7,13 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import InputBase from "@material-ui/core/InputBase";
-import Badge from "@material-ui/core/Badge";
+// import Badge from "@material-ui/core/Badge";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
 import SearchIcon from "@material-ui/icons/Search";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import MailIcon from "@material-ui/icons/Mail";
-import NotificationsIcon from "@material-ui/icons/Notifications";
+// import MailIcon from "@material-ui/icons/Mail";
+// import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import { NavLink } from "react-router-dom";
 import { logout } from "../../../redux/action/authUserAction";
@@ -154,14 +154,14 @@ export default function PrimarySearchAppBar(props) {
         <>
           <div className={classes.sectionDesktop}>
             <NavLink
-              to="/albums"
+              to="/albums-priv"
               className={classes.navLinkStyle}
               activeStyle={activeStyles}
             >
               Albums
             </NavLink>
             <NavLink
-              to="/upload"
+              to="/create-cloudi"
               className={classes.navLinkStyle}
               activeStyle={activeStyles}
             >
@@ -277,7 +277,7 @@ export default function PrimarySearchAppBar(props) {
       </MenuItem> */}
       <MenuItem>
         <NavLink
-          to="/albums"
+          to="/albums-priv"
           // className={classes.navLinkStyle}
           // activeStyle={activeStyles}
         >
@@ -286,7 +286,7 @@ export default function PrimarySearchAppBar(props) {
       </MenuItem>
       <MenuItem>
         <NavLink
-          to="/upload"
+          to="/create-cloudi"
           // className={classes.navLinkStyle}
           // activeStyle={activeStyles}
         >

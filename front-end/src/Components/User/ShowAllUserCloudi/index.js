@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Cloudi from "../Cloudi";
+import Cloudi from "../../Cards/CloudiCardPriv";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
@@ -22,34 +22,34 @@ class AllUserCloudis extends Component {
     isFetching: false
   };
 
-  componentDidMount() {
-    this.setState({
-      isFetching: true
-    });
+  // componentDidMount() {
+  //   this.setState({
+  //     isFetching: true
+  //   });
 
-    this.props
-      .getAllUserCloudis(this.props.authUser.user.id)
-      .then(allUserCloudis => {
-        this.setState({
-          isFetching: false
-        });
-      })
-      .catch(error => {
-        this.setState({
-          isFetching: false
-        });
-        console.log(error);
-      });
-  }
+  //   this.props
+  //     .getAllUserCloudis(this.props.authUser.user.id)
+  //     .then(allUserCloudis => {
+  //       this.setState({
+  //         isFetching: false
+  //       });
+  //     })
+  //     .catch(error => {
+  //       this.setState({
+  //         isFetching: false
+  //       });
+  //       console.log(error);
+  //     });
+  // }
 
   render() {
-    const { userCloudis } = this.props.cloudi;
+    const { albums } = this.props.album;
 
     const userProfileUrl = this.props.match.url;
 
     let userCloudisGrid = (
       <Grid container justify="center" spacing={1}>
-        {userCloudis.map(cloudi => {
+        {albums.map(cloudi => {
           return (
             <Grid key={cloudi._id} item>
               <Cloudi
@@ -73,6 +73,7 @@ class AllUserCloudis extends Component {
 
 const mapStateToProps = state => {
   return {
+    album: state.album,
     cloudi: state.cloudi,
     authUser: state.authUser
   };

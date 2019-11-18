@@ -33,7 +33,6 @@ export const getAllUserAlbums = id => async dispatch => {
     let foundAllUserAlbums = await Axios.get(
       `/album/get-all-user-albums/${id}`
     );
-    // console.log(foundAllUserAlbums);
 
     dispatch({
       type: GET_ALL_USER_ALBUMS,
@@ -56,7 +55,6 @@ export const createAlbum = albumInfo => async dispatch => {
 
   try {
     let success = await Axios.post("/album/create-album", cloudiObj);
-    console.log(success);
     dispatch(successCreateAlbum(success.data));
 
     return Promise.resolve(success);
@@ -103,7 +101,7 @@ export const getAlbumByID = id => async dispatch => {
 
     dispatch({
       type: GET_ALBUMS_BY_ID,
-      payload: foundAlbum.data
+      payload: foundAlbum.data.cloudis
     });
 
     return Promise.resolve(foundAlbum.data);
