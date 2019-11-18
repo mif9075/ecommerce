@@ -20,12 +20,14 @@ module.exports = {
   createAlbum: async (req, res) => {
     let id = req.body.id;
     let name = req.body.title;
+    let cover = req.body.cover;
 
     try {
       let foundUser = await User.findById(id);
       let newAlbum = await new Album({
         name: name,
-        user_id: id
+        user_id: id,
+        cover: cover
       });
       let savedNewAlbum = await newAlbum.save();
       await foundUser.album.push(savedNewAlbum);

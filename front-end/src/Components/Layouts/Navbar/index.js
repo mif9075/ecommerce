@@ -24,7 +24,9 @@ import { submitSearch } from "../../../redux/action/searchAction";
 const useStyles = makeStyles(theme => ({
   navLinkStyle: {
     textDecoration: "none",
-    color: "white"
+    color: "white",
+    paddingRight: "10px",
+    alignSelf: "center"
   },
   activeStyles: {
     color: "white",
@@ -151,7 +153,21 @@ export default function PrimarySearchAppBar(props) {
       return (
         <>
           <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show 4 new mails" color="inherit">
+            <NavLink
+              to="/albums"
+              className={classes.navLinkStyle}
+              activeStyle={activeStyles}
+            >
+              Albums
+            </NavLink>
+            <NavLink
+              to="/upload"
+              className={classes.navLinkStyle}
+              activeStyle={activeStyles}
+            >
+              Upload
+            </NavLink>
+            {/* <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <MailIcon />
               </Badge>
@@ -160,7 +176,7 @@ export default function PrimarySearchAppBar(props) {
               <Badge badgeContent={17} color="secondary">
                 <NotificationsIcon />
               </Badge>
-            </IconButton>
+            </IconButton> */}
             <IconButton
               edge="end"
               aria-label="account of current user"
@@ -214,7 +230,7 @@ export default function PrimarySearchAppBar(props) {
           Profile
         </NavLink>
       </MenuItem>
-      <MenuItem>
+      {/* <MenuItem>
         <NavLink to="albums" onClick={handleMenuClose}>
           Albums
         </NavLink>
@@ -223,7 +239,7 @@ export default function PrimarySearchAppBar(props) {
         <NavLink to="upload" onClick={handleMenuClose}>
           Upload
         </NavLink>
-      </MenuItem>
+      </MenuItem> */}
       <MenuItem>
         <NavLink to="/" onClick={handleLogout}>
           Logout
@@ -243,7 +259,7 @@ export default function PrimarySearchAppBar(props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      {/* <MenuItem>
         <IconButton aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
             <MailIcon />
@@ -258,6 +274,24 @@ export default function PrimarySearchAppBar(props) {
           </Badge>
         </IconButton>
         <p>Notifications</p>
+      </MenuItem> */}
+      <MenuItem>
+        <NavLink
+          to="/albums"
+          // className={classes.navLinkStyle}
+          // activeStyle={activeStyles}
+        >
+          Albums
+        </NavLink>
+      </MenuItem>
+      <MenuItem>
+        <NavLink
+          to="/upload"
+          // className={classes.navLinkStyle}
+          // activeStyle={activeStyles}
+        >
+          Upload
+        </NavLink>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton

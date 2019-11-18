@@ -1,13 +1,10 @@
 import {
-  USER_SIGNEDIN,
-  USER_CHECK
+  USER_SIGNEDIN
   // USER_SIGNOUT,
   // USER_REFRESH,
   // USER_UPDATE
 } from "../actionTypes";
 import Axios from "../../lib/Axios";
-import setAuthToken from "../../lib/setAuthToken";
-import jwtDecoded from "jwt-decode";
 
 const getUser = email => async dispatch => {
   try {

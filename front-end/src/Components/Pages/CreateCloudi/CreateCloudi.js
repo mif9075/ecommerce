@@ -70,6 +70,7 @@ class CreateCloudi extends Component {
           if (e.name === this.state.formData.album) {
             return e._id;
           }
+          return null;
         });
         newUserObj.id = this.props.authUser.user.id;
         newUserObj.album = newAlbum[0]._id;

@@ -30,7 +30,7 @@ class Cloudi extends Component {
         <CardActionArea>
           <CardMedia
             className={this.props.classes.media}
-            image={this.props.image}
+            image={this.props.image || "/"}
             title="Album"
           />
           <CardContent>
@@ -59,7 +59,12 @@ class Cloudi extends Component {
             <Button
               size="small"
               color="primary"
-              onClick={() => this.props.handleUserCloudiByID(this.props._id, this.props.user_id)}
+              onClick={() =>
+                this.props.handleUserCloudiByID(
+                  this.props._id,
+                  this.props.user_id
+                )
+              }
             >
               Delete
             </Button>

@@ -11,9 +11,35 @@ import AllUserAlbums from "../../Layouts/ShowAllUserAlbums";
 class CreateAlbum extends Component {
   state = {
     formData: {
-      title: ""
+      title: "",
+      cover: ""
     },
     submitted: false
+  };
+
+  uploadWidget = () => {
+    window.cloudinary.openUploadWidget(
+      {
+        cloud_name: "beisboldom",
+        upload_preset: "wdhfcxjk",
+        tags: ["hamster"]
+      },
+      (error, result) => {
+        if (error) {
+          console.log(error);
+        } else {
+          if (result.event === "success") {
+            // console.log(result.info.secure_url);
+            const { formData } = this.state;
+            formData["cover"] = result.info.secure_url;
+            this.setState({
+              ...this.state,
+              formData
+            });
+          }
+        }
+      }
+    );
   };
 
   successfullyCreatedAlbum = () => {
@@ -82,7 +108,6 @@ class CreateAlbum extends Component {
           {submitted ? <Spinner /> : form}
           <br />
           <div style={{ height: "25px", margin: "25px 20px" }}></div>
-
           <div style={{ height: "25px", margin: "20px 20px" }}></div>
           <ButtonClass
             color="primary"
@@ -95,8 +120,17 @@ class CreateAlbum extends Component {
           </ButtonClass>
           <br />
           <hr style={{ width: "50%" }} />
-          <AllUserAlbums />
         </ValidatorForm>
+        <ButtonClass
+          onClick={this.uploadWidget}
+          color="primary"
+          variant="outlined"
+          type="submit"
+          style={{ top: "-170px" }}
+        >
+          Album Cover
+        </ButtonClass>
+        <AllUserAlbums />
       </div>
     );
   }

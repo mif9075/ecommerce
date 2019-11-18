@@ -18,6 +18,11 @@ const AlbumSchema = new mongoose.Schema({
     }
   ],
 
+  cover: {
+    type: String,
+    default: ""
+  },
+
   timestamp: {
     type: String,
     default: now.format("dddd, MMMM Do YYYY, h:mm:ss a")

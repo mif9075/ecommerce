@@ -22,7 +22,7 @@ module.exports = {
 
     try {
       let foundUser = await User.findById(id);
-      let newCloudi = await new Cloudi({
+      let newCloudi = new Cloudi({
         title: title,
         image: image,
         user_id: id,
