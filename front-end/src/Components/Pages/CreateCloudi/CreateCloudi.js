@@ -145,6 +145,7 @@ class CreateCloudi extends Component {
         <br />
         <hr style={{ width: "50%" }} />
         <ShowAllUserCloudis />
+       
       </div>
     );
   }

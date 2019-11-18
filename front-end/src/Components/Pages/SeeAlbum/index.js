@@ -51,7 +51,7 @@ console.log(this.props)
 
     let albumInfo = (
       <div className="App">
-        <h1>Image Title: {title}</h1>
+        <h1>Album: {title}</h1>
         <div>
         {/* <CloudinaryContext cloud_name= "beisboldom">
         <Image publicId={image1}  secure="true">
@@ -59,7 +59,7 @@ console.log(this.props)
         </Image>
         </CloudinaryContext> */}
 
-          {/* <img src={image} alt="hamster" /> */}
+          <img src={image} alt="hamster" />
         </div>
       </div>
     );
