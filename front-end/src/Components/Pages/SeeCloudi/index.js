@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 // import { getCloudiByID } from '../../../redux/action/cloudiAction';
 import { getAllCloudis } from "../../../redux/action/cloudiAction";
 import Spinner from "../../../Factory/Spinner";
+import {Image, Transformation, CloudinaryContext} from 'cloudinary-react';
+
+
 
 class SeeCloudi extends Component {
   state = {
@@ -10,7 +13,7 @@ class SeeCloudi extends Component {
     image: "",
     isFetching: null
   };
-
+  
   componentDidMount() {
     if (this.props.location.state !== undefined) {
       this.setState({
@@ -39,13 +42,24 @@ class SeeCloudi extends Component {
   }
 
   render() {
+
+// console.log(this.props)
     const { title, image, isFetching } = this.state;
+
+    // console.log(image)
+    var image1 = image.substring(image.lastIndexOf('/')+1);
 
     let cloudiInfo = (
       <div className="App">
-        <h1>title {title}</h1>
+        <h1>Image Title: {title}</h1>
         <div>
-          <img src={image} alt="hamster" />
+        <CloudinaryContext cloud_name= "beisboldom">
+        <Image publicId={image1}  secure="true">
+        <Transformation effect="grayscale" />
+        </Image>
+        </CloudinaryContext>
+
+          {/* <img src={image} alt="hamster" /> */}
         </div>
       </div>
     );

@@ -52,7 +52,7 @@ class Cloudi extends Component {
                   }
                 }}
               >
-                Learn More
+                Cloudinary Grayscale
               </Link>
             </Button>
           ) : (
