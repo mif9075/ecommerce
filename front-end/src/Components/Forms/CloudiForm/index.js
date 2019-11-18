@@ -78,7 +78,7 @@ class CreateCloudi extends Component {
           .createCloudi(newUserObj)
           .then(() => {
             this.successfullyCreatedCloudi();
-            this.props.history.push("/upload");
+            this.props.history.push("/create-cloudi");
             // <Redirect to="/upload" />
           })
           .catch(error => {
