@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 import CreateCloudi from "./Components/Pages/CreateCloudi/CreateCloudi";
 import CreateAlbum from "./Components/Pages/CreateAlbum/CreateAlbum";
+import SeeAlbum from "./Components/Pages/SeeAlbum";
 
 const Home = React.lazy(() => import("./Components/Pages/Home"));
 const Navbar = React.lazy(() => import("./Components/Layouts/Navbar"));
@@ -34,6 +35,8 @@ class App extends Component {
           <PrivateRoute exact path="/albums" component={CreateAlbum} />
           <PrivateRoute exact path="/see-cloudi/:id" component={SeeCloudi} />
           <PrivateRoute exact path="/user-profile" component={UserProfile} />
+          <PrivateRoute exact path="/see-album/:id"
+          component={SeeAlbum} />
           <Route Path="" component={NotFound} />
         </Switch>
         <Footer />
