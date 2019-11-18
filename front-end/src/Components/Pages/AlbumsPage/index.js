@@ -5,7 +5,6 @@ export default class AlbumPage extends Component {
   render() {
     return (
       <>
-        hellos
         <AllUserAlbums />
       </>
     );

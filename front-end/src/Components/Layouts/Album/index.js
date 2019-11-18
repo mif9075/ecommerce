@@ -47,7 +47,7 @@ class Album extends Component {
             <Button size="small" color="primary">
               <Link
                 to={{
-                  pathname: `/see-album/${this.props._id}`,
+                  pathname: `/albums-priv`,
                   state: {
                     id: this.props._id,
                     title: this.props.title,
@@ -55,7 +55,7 @@ class Album extends Component {
                   }
                 }}
               >
-                Click for Album
+                Click for Albums
               </Link>
             </Button>
           ) : (
