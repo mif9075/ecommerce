@@ -55,7 +55,7 @@ class Album extends Component {
                   }
                 }}
               >
-                Learn More
+                Click for Album
               </Link>
             </Button>
           ) : (

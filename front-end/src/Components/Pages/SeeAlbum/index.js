@@ -1,17 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 // import { getCloudiByID } from '../../../redux/action/cloudiAction';
-import { getAllCloudis } from "../../../redux/action/cloudiAction";
+import { getAllAlbums } from "../../../redux/action/albumAction";
 import Spinner from "../../../Factory/Spinner";
-import { Image, Transformation, CloudinaryContext } from "cloudinary-react";
+// import {Image, Transformation, CloudinaryContext} from 'cloudinary-react';
 
-class SeeCloudi extends Component {
+
+
+class SeeAlbum extends Component {
   state = {
     title: "",
     image: "",
     isFetching: null
   };
-
+  
   componentDidMount() {
     if (this.props.location.state !== undefined) {
       this.setState({
@@ -22,14 +24,14 @@ class SeeCloudi extends Component {
       this.setState({
         isFetching: true
       });
-      this.props.getAllCloudis
+      this.props.getAllAlbums
 
         //   (this.props.match.params.id)
 
-        .then(cloudi => {
+        .then(album => {
           this.setState({
-            title: cloudi.title,
-            image: cloudi.image,
+            title: album.title,
+            image: album.image,
             isFetching: false
           });
         })
@@ -40,29 +42,30 @@ class SeeCloudi extends Component {
   }
 
   render() {
-    // console.log(this.props)
+
+console.log(this.props)
     const { title, image, isFetching } = this.state;
 
     // console.log(image)
-    var image1 = image.substring(image.lastIndexOf("/") + 1);
+    // var image1 = image.substring(image.lastIndexOf('/')+1);
 
-    let cloudiInfo = (
+    let albumInfo = (
       <div className="App">
         <h1>Image Title: {title}</h1>
         <div>
-          <CloudinaryContext cloud_name="beisboldom">
-            <Image publicId={image1} secure="true">
-              <Transformation effect="grayscale" />
-            </Image>
-          </CloudinaryContext>
+        {/* <CloudinaryContext cloud_name= "beisboldom">
+        <Image publicId={image1}  secure="true">
+        <Transformation effect="grayscale" />
+        </Image>
+        </CloudinaryContext> */}
 
           {/* <img src={image} alt="hamster" /> */}
         </div>
       </div>
     );
 
-    return isFetching ? <Spinner /> : cloudiInfo;
+    return isFetching ? <Spinner /> : albumInfo;
   }
 }
 
-export default connect(null, { getAllCloudis })(SeeCloudi);
+export default connect(null, { getAllAlbums })(SeeAlbum)

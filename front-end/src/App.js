@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
 import "./App.css";
 import { connect } from "react-redux";
+import SeeAlbum from "./Components/Pages/SeeAlbum";
 
 // import PrivateRoute from "./Components/PrivateRoute/PrivateRoute";
 const AlbumsPage = React.lazy(() => import("./Components/Pages/AlbumsPage"));
@@ -42,6 +43,7 @@ class App extends Component {
           <PrivateRoute exact path="/album-priv" component={AlbumPriv} />
           <PrivateRoute exact path="/see-cloudi/:id" component={SeeCloudi} />
           <PrivateRoute exact path="/user-profile" component={UserProfile} />
+          <PrivateRoute exact path="/see-album/:id" component={SeeAlbum} />
           <Route Path="" component={NotFound} />
         </Switch>
         <Footer />
