@@ -53,6 +53,7 @@ class SeeCloudi extends Component {
           <CloudinaryContext cloud_name="beisboldom">
             <Image publicId={image1} secure="true">
               <Transformation effect="grayscale" />
+              {/* <Transformation effect="improve:outdoor" /> */}
             </Image>
           </CloudinaryContext>
 
